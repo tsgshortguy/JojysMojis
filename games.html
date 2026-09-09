@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Docs</title>
+  <meta name="description" content="Google Docs — Online Document Editor">
+  <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" id="tab-favicon">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Top Info Ticker -->
+  <div class="top-ticker">
+    <span class="ticker-highlight"><span class="ticker-dot"></span> BUILT BY YOURS TRULY</span>
+    <span>·</span>
+    <span style="font-weight: 700; color: var(--red-bright);">⚡ JOJY'S MOJIS</span>
+    <span>·</span>
+    <span>🎮 30+ UNBLOCKED GAMES</span>
+    <span>·</span>
+    <span>🚀 ULTRAVIOLET V3 ENGINE</span>
+    <span>·</span>
+    <span>PRESS <b style="color:#fff">ESC</b> TO PANIC</span>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loader-ring"></div>
+    <div class="loading-text">Loading Game Tunnel...</div>
+    <div class="loading-subtext">Jojy's Mojis · Built by yours truly</div>
+  </div>
+
+  <!-- Upgraded Proxy Frame (fullscreen browser interface) -->
+  <div class="proxy-frame-container" id="proxy-container">
+    <div class="proxy-toolbar">
+      <div class="proxy-nav-btns">
+        <button class="tb-btn tb-btn-close" id="proxy-back" title="Exit Game (Back to Library)">✕</button>
+        <button class="tb-btn" id="proxy-history-back" title="History Back">←</button>
+        <button class="tb-btn" id="proxy-history-forward" title="History Forward">→</button>
+        <button class="tb-btn" id="proxy-refresh" title="Reload Page">↻</button>
+      </div>
+      <div class="proxy-url-wrap">
+        <span class="proxy-ssl-icon" title="Secure Encrypted Proxy">🔒</span>
+        <input class="proxy-url-bar" id="proxy-url-display" placeholder="Enter URL or search..." autocomplete="off" spellcheck="false">
+      </div>
+      <div class="proxy-nav-btns">
+        <button class="tb-btn" id="proxy-fullscreen" title="Toggle Fullscreen">⛶</button>
+        <button class="tb-btn" id="proxy-popout" title="Open in about:blank tab">↗</button>
+      </div>
+    </div>
+    <iframe class="proxy-frame" id="proxy-frame" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-storage-access-by-user-activation allow-downloads" allowfullscreen></iframe>
+  </div>
+
+  <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar fade-in">
+      <a href="/" class="logo">
+        <div class="logo-wrap">
+          <img src="/favicon.jpg" alt="Jojy's Mojis" class="logo-icon">
+        </div>
+        <div class="logo-info">
+          <span class="logo-text">Jojy's Mojis</span>
+          <span class="logo-tagline">Built by yours truly</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/games.html" class="active">Game Library</a></li>
+        <li><button class="panic-btn" id="panic-btn" title="Press ESC to panic">ESC → PANIC</button></li>
+      </ul>
+    </nav>
+
+    <!-- Games Page Hero -->
+    <section class="hero fade-in fade-in-delay-1" style="padding: 20px 0 30px;">
+      <div class="hero-pill">
+        <span>🎮</span> Built by yours truly · Jojy's Mojis Arcade & Streaming
+      </div>
+      <h1>Game & Stream <span class="accent">Library</span></h1>
+      <p>39 unblocked games & streaming channels ready to launch with zero restrictions. Click any card to play in high-speed stealth mode.</p>
+    </section>
+
+    <!-- Category Filter Tabs -->
+    <div class="filter-tabs fade-in fade-in-delay-2" id="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All Items</button>
+      <button class="filter-tab" data-filter="streaming">🎬 Movies & TV</button>
+      <button class="filter-tab" data-filter="racing">Racing</button>
+      <button class="filter-tab" data-filter="action">Action / FPS</button>
+      <button class="filter-tab" data-filter="arcade">Arcade</button>
+      <button class="filter-tab" data-filter="puzzle">Puzzle / Chill</button>
+      <button class="filter-tab" data-filter="sports">Sports</button>
+      <button class="filter-tab" data-filter="sandbox">Sandbox</button>
+      <button class="filter-tab" data-filter="proxy">🔴 Web Proxies</button>
+    </div>
+
+    <!-- All Games Grid -->
+    <div class="games-grid fade-in fade-in-delay-3" id="all-games">
+      <!-- Populated dynamically by JS below -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer fade-in fade-in-delay-4">
+      <p class="footer-credit">Built by yours truly ☠️ · <span class="yours-truly">Jojy's Mojis</span></p>
+      <p class="footer-sub">Stay stealthy, browse freely. High-speed encrypted proxy arcade.</p>
+    </footer>
+  </div>
+
+  <!-- Cloak Indicator Floating Pill -->
+  <div class="cloak-indicator" id="cloak-toggle" title="Click to toggle tab cloak disguise">
+    <span class="status-dot"></span>
+    <span id="cloak-text">Cloaked as Google Docs</span>
+  </div>
+
+  <script src="/uv/uv.bundle.js"></script>
+  <script src="/uv/uv.config.js"></script>
+  <script>
+    /* ═══ Games Page Logic ═══ */
+
+    const GAMES = [
+      // ── Featured Hits & Streaming ──
+      { id: "cinejoy",          name: "Cinejoy Movies & TV", image: "/assets/games/cinejoy.png",         emoji: "🎬", genre: "Free Streaming HD",   type: "proxy", url: "https://cinejoy.to",                 category: "streaming" },
+      { id: "slope",            name: "Slope",               image: "/assets/games/slope.png",           emoji: "🟢", genre: "Arcade / Speed",      type: "embed", url: "https://slopegamefree.github.io/slope/", category: "arcade" },
+      { id: "roblox",           name: "Roblox",              image: "/assets/games/roblox.jpg",          emoji: "🎮", genre: "Sandbox / MMO",       type: "proxy", url: "https://www.roblox.com",              category: "sandbox" },
+      { id: "monkey-mart",      name: "Monkey Mart",         image: "/assets/games/monkey-mart.png",     emoji: "🐒", genre: "Idle / Tycoon",       type: "embed", url: "https://poki.com/en/g/monkey-mart",  category: "arcade" },
+      { id: "motox3m",          name: "Moto X3M",            image: "/assets/games/motox3m.jpg",         emoji: "🏍️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m",      category: "racing" },
+      { id: "subway-surfers",   name: "Subway Surfers",      image: "/assets/games/subway-surfers.png",  emoji: "🏃", genre: "Endless Runner",      type: "embed", url: "https://poki.com/en/g/subway-surfers", category: "arcade" },
+      { id: "1v1lol",           name: "1v1.LOL",             image: "/assets/games/1v1lol.png",          emoji: "🔫", genre: "Shooter / Build",     type: "proxy", url: "https://1v1.lol",                      category: "action" },
+      { id: "retro-bowl",       name: "Retro Bowl",          image: "/assets/games/retro-bowl.png",      emoji: "🏈", genre: "Sports / Football",   type: "embed", url: "https://poki.com/en/g/retro-bowl",     category: "sports" },
+      { id: "krunker",          name: "Krunker.io",          image: "/assets/games/krunker.jpg",         emoji: "🎯", genre: "FPS / Multiplayer",   type: "proxy", url: "https://krunker.io",                   category: "action" },
+      { id: "minecraft",        name: "Minecraft Classic",   image: "/assets/games/minecraft.jpg",       emoji: "⛏️", genre: "Sandbox / Creative",  type: "proxy", url: "https://classic.minecraft.net",        category: "sandbox" },
+
+      // ── Racing ──
+      { id: "snow-rider-3d",    name: "Snow Rider 3D",       image: "/assets/games/snow-rider-3d.png",   emoji: "🛷", genre: "Racing / 3D Sled",     type: "embed", url: "https://snowrider3d.com/",           category: "racing" },
+      { id: "drift-boss",       name: "Drift Boss",          image: "/assets/games/drift-boss.png",      emoji: "🚙", genre: "Racing / Drift",      type: "embed", url: "https://poki.com/en/g/drift-boss",    category: "racing" },
+      { id: "motox3m2",         name: "Moto X3M 2",          image: "/assets/games/motox3m2.webp",       emoji: "🏍️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-2",     category: "racing" },
+      { id: "motox3m-winter",   name: "Moto X3M Winter",     image: "/assets/games/motox3m-winter.jpg",  emoji: "❄️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-4-winter", category: "racing" },
+      { id: "motox3m-pool",     name: "Moto X3M Pool Party", image: "/assets/games/motox3m-pool.jpg",    emoji: "🏖️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-pool-party", category: "racing" },
+      { id: "drift-hunters",    name: "Drift Hunters",        image: "/assets/games/drift-hunters.png",   emoji: "🚗", genre: "Racing / Drift",      type: "embed", url: "https://poki.com/en/g/drift-hunters",   category: "racing" },
+      { id: "smash-karts",      name: "Smash Karts",          image: "/assets/games/smash-karts.png",     emoji: "🏎️", genre: "Racing / Battle",     type: "proxy", url: "https://smashkarts.io",                category: "racing" },
+      { id: "madalin-stunt",    name: "Madalin Stunt Cars 2", image: "/assets/games/madalin-stunt.png",   emoji: "🚙", genre: "Racing / Stunts",    type: "embed", url: "https://poki.com/en/g/madalin-stunt-cars-2", category: "racing" },
+
+      // ── Action / Shooters / Horror ──
+      { id: "fnaf",             name: "Five Nights at Freddy's", image: "/assets/games/fnaf.webp",       emoji: "🐻", genre: "Horror / Survival",   type: "embed", url: "https://ubg98.github.io/FNAF/",       category: "action" },
+      { id: "paperio2",         name: "Paper.io 2",          image: "/assets/games/paperio2.jpg",        emoji: "🗺️", genre: "Multiplayer / Arena",  type: "proxy", url: "https://paper-io.com/",              category: "action" },
+      { id: "shellshockers",    name: "Shell Shockers",       image: "/assets/games/shellshockers.webp",  emoji: "🥚", genre: "FPS / Multiplayer",   type: "proxy", url: "https://shellshock.io",                category: "action" },
+      { id: "bloxd",            name: "Bloxd.io",             image: "/assets/games/bloxd.png",           emoji: "🧱", genre: "Sandbox / PvP",       type: "proxy", url: "https://bloxd.io",                     category: "sandbox" },
+      { id: "voxiom",           name: "Voxiom.io",            image: "/assets/games/voxiom.png",          emoji: "💥", genre: "Battle Royale",       type: "proxy", url: "https://voxiom.io",                    category: "action" },
+      { id: "zombsroyale",      name: "ZombsRoyale.io",       image: "/assets/games/zombsroyale.png",     emoji: "🧟", genre: "Battle Royale",       type: "proxy", url: "https://zombsroyale.io",               category: "action" },
+
+      // ── Puzzle / Idle / Simulation ──
+      { id: "bitlife",          name: "BitLife Simulator",   image: "/assets/games/bitlife.jpg",         emoji: "🧬", genre: "Simulation / Life",   type: "proxy", url: "https://bitlife2.org/",              category: "puzzle" },
+      { id: "tiny-fishing",     name: "Tiny Fishing",        image: "/assets/games/tiny-fishing.png",    emoji: "🎣", genre: "Casual / Idle",       type: "embed", url: "https://poki.com/en/g/tiny-fishing",  category: "puzzle" },
+      { id: "2048",             name: "2048",                  image: "/assets/games/2048.png",            emoji: "🔢", genre: "Puzzle",              type: "embed", url: "https://poki.com/en/g/2048",            category: "puzzle" },
+      { id: "cookie-clicker",   name: "Cookie Clicker",        image: "/assets/games/cookie-clicker.png",  emoji: "🍪", genre: "Idle / Clicker",      type: "proxy", url: "https://orteil.dashnet.org/cookieclicker/", category: "puzzle" },
+
+      // ── Arcade / Rhythm / Runner ──
+      { id: "fnf",              name: "Friday Night Funkin'", image: "/assets/games/fnf.png",            emoji: "🎤", genre: "Rhythm / Music",      type: "embed", url: "https://fridaynight-funkin.github.io/", category: "arcade" },
+      { id: "crossy-road",      name: "Crossy Road",           image: "/assets/games/crossy-road.png",     emoji: "🐔", genre: "Arcade",              type: "embed", url: "https://poki.com/en/g/crossy-road",    category: "arcade" },
+      { id: "tunnel-rush",      name: "Tunnel Rush",           image: "/assets/games/tunnel-rush.png",     emoji: "🌀", genre: "Arcade / Speed",      type: "embed", url: "https://poki.com/en/g/tunnel-rush",    category: "arcade" },
+      { id: "run3",             name: "Run 3",                 image: "/assets/games/run3.png",            emoji: "🏃", genre: "Platformer / Endless", type: "embed", url: "https://poki.com/en/g/run-3",         category: "arcade" },
+      { id: "geometry-dash",    name: "Geometry Dash",         image: "/assets/games/geometry-dash.png",   emoji: "🔶", genre: "Rhythm / Platformer", type: "embed", url: "https://poki.com/en/g/geometry-dash",   category: "arcade" },
+      { id: "temple-run2",      name: "Temple Run 2",          image: "/assets/games/temple-run2.png",     emoji: "🏛️", genre: "Endless Runner",      type: "embed", url: "https://poki.com/en/g/temple-run-2",  category: "arcade" },
+      { id: "getaway-shootout", name: "Getaway Shootout",      image: "/assets/games/getaway-shootout.png", emoji: "🤠", genre: "Action / Multiplayer", type: "embed", url: "https://poki.com/en/g/getaway-shootout", category: "action" },
+      { id: "basket-random",    name: "Basket Random",         image: "/assets/games/basket-random.jpg",   emoji: "🏀", genre: "Sports / Funny",      type: "embed", url: "https://poki.com/en/g/basket-random",  category: "sports" },
+      { id: "stickman-hook",    name: "Stickman Hook",         image: "/assets/games/stickman-hook.png",   emoji: "🪝", genre: "Arcade / Swing",      type: "embed", url: "https://poki.com/en/g/stickman-hook",  category: "arcade" },
+      { id: "boxing-random",    name: "Boxing Random",         image: "/assets/games/boxing-random.jpg",   emoji: "🥊", genre: "Sports / Funny",      type: "embed", url: "https://poki.com/en/g/boxing-random",  category: "sports" },
+      { id: "narrow-one",       name: "Narrow.One",            image: "/assets/games/narrow-one.png",      emoji: "🏹", genre: "Archery / Multiplayer", type: "proxy", url: "https://narrow.one",                category: "action" },
+    ];
+
+    function isUrl(input) {
+      return /^(https?:\/\/)?[\w\-]+(\.[\w\-]+)+/.test(input) || input.includes("://");
+    }
+    function formatUrl(input) {
+      input = input.trim();
+      if (input.startsWith("http://") || input.startsWith("https://")) return input;
+      if (isUrl(input)) return "https://" + input;
+      return "https://www.google.com/search?q=" + encodeURIComponent(input);
+    }
+    function encodeForProxy(url) {
+      const config = self.__uv$config;
+      if (!config) return "/~/";
+      return config.prefix + config.encodeUrl(url);
+    }
+
+    // ── Proxy Init ──
+    let proxyReady = false;
+    async function initProxy() {
+      try {
+        if ("serviceWorker" in navigator) {
+          const swRegistration = await navigator.serviceWorker.register("/sw.js", {
+            scope: self.__uv$config?.prefix || "/uv/service/",
+          });
+          try { await swRegistration.update(); } catch (_) {}
+          const sw = swRegistration.installing || swRegistration.waiting;
+          if (sw) {
+            await new Promise((resolve) => {
+              if (sw.state === "activated") return resolve();
+              sw.addEventListener("statechange", function onStateChange() {
+                if (sw.state === "activated") {
+                  sw.removeEventListener("statechange", onStateChange);
+                  resolve();
+                }
+              });
+              setTimeout(resolve, 1500);
+            });
+          }
+          try {
+            const { BareMuxConnection } = await import("/baremux/index.mjs");
+            const { default: BareClient } = await import("/bareasmodule3/index.mjs");
+            const conn = new BareMuxConnection("/baremux/worker.js");
+            const client = new BareClient(location.origin + "/bare/");
+            await conn.setRemoteTransport(client, "bare-as-module3");
+            console.log("[✓] BareMux connected via setRemoteTransport.");
+          } catch (remoteErr) {
+            console.warn("[!] setRemoteTransport failed, trying fallback:", remoteErr);
+            try {
+              const { BareMuxConnection } = await import("/baremux/index.mjs");
+              const conn = new BareMuxConnection("/baremux/worker.js");
+              await conn.setTransport("/bareasmodule3/index.mjs", [location.origin + "/bare/"]);
+            } catch (transportErr) {
+              console.error("[✗] BareMux transport failed completely:", transportErr);
+            }
+          }
+          proxyReady = true;
+        }
+      } catch (err) { console.error("SW failed:", err); }
+    }
+    initProxy();
+
+    // ── DOM References ──
+    const proxyContainer = document.getElementById("proxy-container");
+    const proxyFrame     = document.getElementById("proxy-frame");
+    const proxyUrlBar    = document.getElementById("proxy-url-display");
+    const proxyBack      = document.getElementById("proxy-back");
+    const proxyRefresh   = document.getElementById("proxy-refresh");
+    const proxyHistBack  = document.getElementById("proxy-history-back");
+    const proxyHistFwd   = document.getElementById("proxy-history-forward");
+    const proxyFull      = document.getElementById("proxy-fullscreen");
+    const proxyPopout    = document.getElementById("proxy-popout");
+    const loadingOverlay = document.getElementById("loading-overlay");
+    const allGamesGrid   = document.getElementById("all-games");
+    const filterTabs     = document.getElementById("filter-tabs");
+    const cloakToggle    = document.getElementById("cloak-toggle");
+    const cloakText      = document.getElementById("cloak-text");
+    const panicBtn       = document.getElementById("panic-btn");
+
+    async function navigateProxy(url) {
+      if (!proxyReady) {
+        if (loadingOverlay) loadingOverlay.classList.add("active");
+        await new Promise(r => {
+          const check = setInterval(() => {
+            if (proxyReady) { clearInterval(check); r(); }
+          }, 100);
+        });
+      }
+
+      const formatted = formatUrl(url);
+      const encoded = encodeForProxy(formatted);
+      if (loadingOverlay) {
+        loadingOverlay.classList.add("active");
+        setTimeout(() => loadingOverlay.classList.remove("active"), 2500);
+      }
+      proxyContainer.classList.add("active");
+      proxyUrlBar.value = formatted;
+      proxyFrame.src = encoded;
+      proxyFrame.addEventListener("load", () => {
+        if (loadingOverlay) loadingOverlay.classList.remove("active");
+      }, { once: true });
+    }
+
+    if (proxyBack) {
+      proxyBack.addEventListener("click", () => {
+        proxyContainer.classList.remove("active");
+        proxyFrame.src = "about:blank";
+      });
+    }
+    if (proxyRefresh) {
+      proxyRefresh.addEventListener("click", () => {
+        proxyFrame.contentWindow?.location.reload();
+      });
+    }
+    if (proxyHistBack) {
+      proxyHistBack.addEventListener("click", () => {
+        proxyFrame.contentWindow?.history.back();
+      });
+    }
+    if (proxyHistFwd) {
+      proxyHistFwd.addEventListener("click", () => {
+        proxyFrame.contentWindow?.history.forward();
+      });
+    }
+    if (proxyFull) {
+      proxyFull.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          proxyContainer.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+    }
+    if (proxyPopout) {
+      proxyPopout.addEventListener("click", () => {
+        const popup = window.open("about:blank", "_blank");
+        if (popup) {
+          const frame = popup.document.createElement("iframe");
+          frame.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;border:none;margin:0;padding:0;";
+          frame.src = proxyFrame.src;
+          popup.document.body.style.margin = "0";
+          popup.document.body.appendChild(frame);
+        }
+      });
+    }
+    if (proxyUrlBar) {
+      proxyUrlBar.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          const val = proxyUrlBar.value.trim();
+          if (val) navigateProxy(val);
+        }
+      });
+    }
+
+    // ── Create Game Card ──
+    function createGameCard(game) {
+      const card = document.createElement("div");
+      card.className = "game-card";
+      card.dataset.category = game.category;
+      card.dataset.type = game.type;
+      card.innerHTML = `
+        <div class="game-thumb-wrap">
+          <img
+            src="${game.image}"
+            alt="${game.name}"
+            class="game-thumb-img"
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+          <div class="game-thumb-fallback">${game.emoji}</div>
+          <span class="game-badge ${game.category === 'streaming' || game.id === 'cinejoy' ? 'badge-stream' : (game.type === 'proxy' ? 'badge-proxy' : 'badge-html5')}">
+            ${game.category === 'streaming' || game.id === 'cinejoy' ? 'HD STREAM' : (game.type === 'proxy' ? 'PROXY' : 'HTML5')}
+          </span>
+          <div class="game-play-hover">
+            <span class="play-pill">${game.category === 'streaming' || game.id === 'cinejoy' ? '▶ Watch Now' : '▶ Play Now'}</span>
+          </div>
+        </div>
+        <div class="game-info">
+          <h3>${game.name}</h3>
+          <span class="game-genre">${game.genre}</span>
+        </div>
+      `;
+      card.addEventListener("click", () => {
+        navigateProxy(game.url);
+      });
+      return card;
+    }
+
+    // ── Render Games ──
+    function renderGames(filter = "all") {
+      allGamesGrid.innerHTML = "";
+      const filtered = filter === "all"
+        ? GAMES
+        : filter === "proxy"
+          ? GAMES.filter(g => g.type === "proxy")
+          : GAMES.filter(g => g.category === filter);
+
+      filtered.forEach(game => {
+        allGamesGrid.appendChild(createGameCard(game));
+      });
+    }
+    renderGames("all");
+
+    // ── Filtering logic ──
+    if (filterTabs) {
+      filterTabs.querySelectorAll(".filter-tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          filterTabs.querySelectorAll(".filter-tab").forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          renderGames(tab.dataset.filter);
+        });
+      });
+    }
+
+    // ── Tab Cloaking ──
+    const CLOAKS = [
+      { title: "Google Docs", icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" },
+      { title: "Google Drive", icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" },
+      { title: "Google Classroom", icon: "https://ssl.gstatic.com/classroom/favicon.png" },
+    ];
+    let currentCloak = 0;
+    function applyCloak(index) {
+      const cloak = CLOAKS[index];
+      document.title = cloak.title;
+      const favicon = document.getElementById("tab-favicon");
+      if (favicon) favicon.href = cloak.icon;
+      if (cloakText) cloakText.textContent = `Cloaked as ${cloak.title}`;
+    }
+    applyCloak(0);
+
+    if (cloakToggle) {
+      cloakToggle.addEventListener("click", () => {
+        currentCloak = (currentCloak + 1) % CLOAKS.length;
+        applyCloak(currentCloak);
+      });
+    }
+
+    // ── Panic Button ──
+    const PANIC_URL = "https://docs.google.com/document/u/0/";
+    function triggerPanic() { window.location.replace(PANIC_URL); }
+    if (panicBtn) panicBtn.addEventListener("click", triggerPanic);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") { e.preventDefault(); triggerPanic(); }
+    });
+  </script>
+</body>
+</html>
