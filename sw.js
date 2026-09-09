@@ -2,9 +2,9 @@
  * Service Worker bootstrap for Ultraviolet.
  * This file gets registered as the service worker and imports the UV SW bundle.
  */
-importScripts("/uv/uv.bundle.js");
-importScripts("/uv/uv.config.js");
-importScripts("/uv/uv.sw.js");
+importScripts("./uv/uv.bundle.js");
+importScripts("./uv/uv.config.js");
+importScripts("./uv/uv.sw.js");
 
 self.addEventListener("install", () => {
   self.skipWaiting();

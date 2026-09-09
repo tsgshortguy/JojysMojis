@@ -7,53 +7,53 @@
 // ─── Game Database with Authentic Game Icons ───────────────────────────────
 const GAMES = [
   // ── Featured ──
-  { id: "roblox",           name: "Roblox",              image: "/assets/games/roblox.jpg",          emoji: "🎮", genre: "Sandbox / MMO",       type: "proxy", url: "https://www.roblox.com",              featured: true },
-  { id: "slope",            name: "Slope",               image: "/assets/games/slope.png",           emoji: "🟢", genre: "Arcade / Speed",      type: "embed", url: "https://slopegamefree.github.io/slope/", featured: true },
-  { id: "cinejoy",          name: "Cinejoy Movies & TV", image: "/assets/games/cinejoy.png",         emoji: "🎬", genre: "Free Streaming HD",   type: "proxy", url: "https://cinejoy.to",                 featured: true },
-  { id: "monkey-mart",      name: "Monkey Mart",         image: "/assets/games/monkey-mart.png",     emoji: "🐒", genre: "Idle / Tycoon",       type: "embed", url: "https://poki.com/en/g/monkey-mart",  featured: true },
-  { id: "motox3m",          name: "Moto X3M",            image: "/assets/games/motox3m.jpg",         emoji: "🏍️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m",      featured: true },
-  { id: "subway-surfers",   name: "Subway Surfers",      image: "/assets/games/subway-surfers.png",  emoji: "🏃", genre: "Endless Runner",      type: "embed", url: "https://poki.com/en/g/subway-surfers", featured: true },
-  { id: "1v1lol",           name: "1v1.LOL",             image: "/assets/games/1v1lol.png",          emoji: "🔫", genre: "Shooter / Build",     type: "proxy", url: "https://1v1.lol",                      featured: true },
-  { id: "retro-bowl",       name: "Retro Bowl",          image: "/assets/games/retro-bowl.png",      emoji: "🏈", genre: "Sports / Football",   type: "embed", url: "https://poki.com/en/g/retro-bowl",     featured: true },
-  { id: "krunker",          name: "Krunker.io",          image: "/assets/games/krunker.jpg",         emoji: "🎯", genre: "FPS / Multiplayer",   type: "proxy", url: "https://krunker.io",                   featured: true },
-  { id: "minecraft",        name: "Minecraft Classic",   image: "/assets/games/minecraft.jpg",       emoji: "⛏️", genre: "Sandbox / Creative",  type: "proxy", url: "https://classic.minecraft.net",        featured: true },
+  { id: "roblox",           name: "Roblox",              image: "./assets/games/roblox.jpg",          emoji: "🎮", genre: "Sandbox / MMO",       type: "proxy", url: "https://www.roblox.com",              featured: true },
+  { id: "slope",            name: "Slope",               image: "./assets/games/slope.png",           emoji: "🟢", genre: "Arcade / Speed",      type: "embed", url: "https://slopegamefree.github.io/slope/", featured: true },
+  { id: "cinejoy",          name: "Cinejoy Movies & TV", image: "./assets/games/cinejoy.png",         emoji: "🎬", genre: "Free Streaming HD",   type: "proxy", url: "https://cinejoy.to",                 featured: true },
+  { id: "monkey-mart",      name: "Monkey Mart",         image: "./assets/games/monkey-mart.png",     emoji: "🐒", genre: "Idle / Tycoon",       type: "embed", url: "https://poki.com/en/g/monkey-mart",  featured: true },
+  { id: "motox3m",          name: "Moto X3M",            image: "./assets/games/motox3m.jpg",         emoji: "🏍️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m",      featured: true },
+  { id: "subway-surfers",   name: "Subway Surfers",      image: "./assets/games/subway-surfers.png",  emoji: "🏃", genre: "Endless Runner",      type: "embed", url: "https://poki.com/en/g/subway-surfers", featured: true },
+  { id: "1v1lol",           name: "1v1.LOL",             image: "./assets/games/1v1lol.png",          emoji: "🔫", genre: "Shooter / Build",     type: "proxy", url: "https://1v1.lol",                      featured: true },
+  { id: "retro-bowl",       name: "Retro Bowl",          image: "./assets/games/retro-bowl.png",      emoji: "🏈", genre: "Sports / Football",   type: "embed", url: "https://poki.com/en/g/retro-bowl",     featured: true },
+  { id: "krunker",          name: "Krunker.io",          image: "./assets/games/krunker.jpg",         emoji: "🎯", genre: "FPS / Multiplayer",   type: "proxy", url: "https://krunker.io",                   featured: true },
+  { id: "minecraft",        name: "Minecraft Classic",   image: "./assets/games/minecraft.jpg",       emoji: "⛏️", genre: "Sandbox / Creative",  type: "proxy", url: "https://classic.minecraft.net",        featured: true },
 
   // ── Racing ──
-  { id: "snow-rider-3d",    name: "Snow Rider 3D",       image: "/assets/games/snow-rider-3d.png",   emoji: "🛷", genre: "Racing / 3D Sled",     type: "embed", url: "https://snowrider3d.com/",           featured: false },
-  { id: "drift-boss",       name: "Drift Boss",          image: "/assets/games/drift-boss.png",      emoji: "🚙", genre: "Racing / Drift",      type: "embed", url: "https://poki.com/en/g/drift-boss",    featured: false },
-  { id: "motox3m2",         name: "Moto X3M 2",          image: "/assets/games/motox3m2.webp",       emoji: "🏍️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-2",     featured: false },
-  { id: "motox3m-winter",   name: "Moto X3M Winter",     image: "/assets/games/motox3m-winter.jpg",  emoji: "❄️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-4-winter", featured: false },
-  { id: "motox3m-pool",     name: "Moto X3M Pool Party", image: "/assets/games/motox3m-pool.jpg",    emoji: "🏖️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-pool-party", featured: false },
-  { id: "drift-hunters",    name: "Drift Hunters",        image: "/assets/games/drift-hunters.png",   emoji: "🚗", genre: "Racing / Drift",      type: "embed", url: "https://poki.com/en/g/drift-hunters",   featured: false },
-  { id: "smash-karts",      name: "Smash Karts",          image: "/assets/games/smash-karts.png",     emoji: "🏎️", genre: "Racing / Battle",     type: "proxy", url: "https://smashkarts.io",                featured: false },
-  { id: "madalin-stunt",    name: "Madalin Stunt Cars 2", image: "/assets/games/madalin-stunt.png",   emoji: "🚙", genre: "Racing / Stunts",    type: "embed", url: "https://poki.com/en/g/madalin-stunt-cars-2", featured: false },
+  { id: "snow-rider-3d",    name: "Snow Rider 3D",       image: "./assets/games/snow-rider-3d.png",   emoji: "🛷", genre: "Racing / 3D Sled",     type: "embed", url: "https://snowrider3d.com/",           featured: false },
+  { id: "drift-boss",       name: "Drift Boss",          image: "./assets/games/drift-boss.png",      emoji: "🚙", genre: "Racing / Drift",      type: "embed", url: "https://poki.com/en/g/drift-boss",    featured: false },
+  { id: "motox3m2",         name: "Moto X3M 2",          image: "./assets/games/motox3m2.webp",       emoji: "🏍️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-2",     featured: false },
+  { id: "motox3m-winter",   name: "Moto X3M Winter",     image: "./assets/games/motox3m-winter.jpg",  emoji: "❄️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-4-winter", featured: false },
+  { id: "motox3m-pool",     name: "Moto X3M Pool Party", image: "./assets/games/motox3m-pool.jpg",    emoji: "🏖️", genre: "Racing / Stunts",     type: "embed", url: "https://poki.com/en/g/moto-x3m-pool-party", featured: false },
+  { id: "drift-hunters",    name: "Drift Hunters",        image: "./assets/games/drift-hunters.png",   emoji: "🚗", genre: "Racing / Drift",      type: "embed", url: "https://poki.com/en/g/drift-hunters",   featured: false },
+  { id: "smash-karts",      name: "Smash Karts",          image: "./assets/games/smash-karts.png",     emoji: "🏎️", genre: "Racing / Battle",     type: "proxy", url: "https://smashkarts.io",                featured: false },
+  { id: "madalin-stunt",    name: "Madalin Stunt Cars 2", image: "./assets/games/madalin-stunt.png",   emoji: "🚙", genre: "Racing / Stunts",    type: "embed", url: "https://poki.com/en/g/madalin-stunt-cars-2", featured: false },
 
   // ── Action / Shooters / Horror ──
-  { id: "fnaf",             name: "Five Nights at Freddy's", image: "/assets/games/fnaf.webp",       emoji: "🐻", genre: "Horror / Survival",   type: "embed", url: "https://ubg98.github.io/FNAF/",       featured: false },
-  { id: "paperio2",         name: "Paper.io 2",          image: "/assets/games/paperio2.jpg",        emoji: "🗺️", genre: "Multiplayer / Arena",  type: "proxy", url: "https://paper-io.com/",              featured: false },
-  { id: "shellshockers",    name: "Shell Shockers",       image: "/assets/games/shellshockers.webp",  emoji: "🥚", genre: "FPS / Multiplayer",   type: "proxy", url: "https://shellshock.io",                featured: false },
-  { id: "bloxd",            name: "Bloxd.io",             image: "/assets/games/bloxd.png",           emoji: "🧱", genre: "Sandbox / PvP",       type: "proxy", url: "https://bloxd.io",                     featured: false },
-  { id: "voxiom",           name: "Voxiom.io",            image: "/assets/games/voxiom.png",          emoji: "💥", genre: "Battle Royale",       type: "proxy", url: "https://voxiom.io",                    featured: false },
-  { id: "zombsroyale",      name: "ZombsRoyale.io",       image: "/assets/games/zombsroyale.png",     emoji: "🧟", genre: "Battle Royale",       type: "proxy", url: "https://zombsroyale.io",               featured: false },
+  { id: "fnaf",             name: "Five Nights at Freddy's", image: "./assets/games/fnaf.webp",       emoji: "🐻", genre: "Horror / Survival",   type: "embed", url: "https://ubg98.github.io/FNAF/",       featured: false },
+  { id: "paperio2",         name: "Paper.io 2",          image: "./assets/games/paperio2.jpg",        emoji: "🗺️", genre: "Multiplayer / Arena",  type: "proxy", url: "https://paper-io.com/",              featured: false },
+  { id: "shellshockers",    name: "Shell Shockers",       image: "./assets/games/shellshockers.webp",  emoji: "🥚", genre: "FPS / Multiplayer",   type: "proxy", url: "https://shellshock.io",                featured: false },
+  { id: "bloxd",            name: "Bloxd.io",             image: "./assets/games/bloxd.png",           emoji: "🧱", genre: "Sandbox / PvP",       type: "proxy", url: "https://bloxd.io",                     featured: false },
+  { id: "voxiom",           name: "Voxiom.io",            image: "./assets/games/voxiom.png",          emoji: "💥", genre: "Battle Royale",       type: "proxy", url: "https://voxiom.io",                    featured: false },
+  { id: "zombsroyale",      name: "ZombsRoyale.io",       image: "./assets/games/zombsroyale.png",     emoji: "🧟", genre: "Battle Royale",       type: "proxy", url: "https://zombsroyale.io",               featured: false },
 
   // ── Puzzle / Idle / Simulation ──
-  { id: "bitlife",          name: "BitLife Simulator",   image: "/assets/games/bitlife.jpg",         emoji: "🧬", genre: "Simulation / Life",   type: "proxy", url: "https://bitlife2.org/",              featured: false },
-  { id: "tiny-fishing",     name: "Tiny Fishing",        image: "/assets/games/tiny-fishing.png",    emoji: "🎣", genre: "Casual / Idle",       type: "embed", url: "https://poki.com/en/g/tiny-fishing",  featured: false },
-  { id: "2048",             name: "2048",                  image: "/assets/games/2048.png",            emoji: "🔢", genre: "Puzzle",              type: "embed", url: "https://poki.com/en/g/2048",            featured: false },
-  { id: "cookie-clicker",   name: "Cookie Clicker",        image: "/assets/games/cookie-clicker.png",  emoji: "🍪", genre: "Idle / Clicker",      type: "proxy", url: "https://orteil.dashnet.org/cookieclicker/", featured: false },
+  { id: "bitlife",          name: "BitLife Simulator",   image: "./assets/games/bitlife.jpg",         emoji: "🧬", genre: "Simulation / Life",   type: "proxy", url: "https://bitlife2.org/",              featured: false },
+  { id: "tiny-fishing",     name: "Tiny Fishing",        image: "./assets/games/tiny-fishing.png",    emoji: "🎣", genre: "Casual / Idle",       type: "embed", url: "https://poki.com/en/g/tiny-fishing",  featured: false },
+  { id: "2048",             name: "2048",                  image: "./assets/games/2048.png",            emoji: "🔢", genre: "Puzzle",              type: "embed", url: "https://poki.com/en/g/2048",            featured: false },
+  { id: "cookie-clicker",   name: "Cookie Clicker",        image: "./assets/games/cookie-clicker.png",  emoji: "🍪", genre: "Idle / Clicker",      type: "proxy", url: "https://orteil.dashnet.org/cookieclicker/", featured: false },
 
   // ── Arcade / Rhythm / Runner ──
-  { id: "fnf",              name: "Friday Night Funkin'", image: "/assets/games/fnf.png",            emoji: "🎤", genre: "Rhythm / Music",      type: "embed", url: "https://fridaynight-funkin.github.io/", featured: false },
-  { id: "crossy-road",      name: "Crossy Road",           image: "/assets/games/crossy-road.png",     emoji: "🐔", genre: "Arcade",              type: "embed", url: "https://poki.com/en/g/crossy-road",    featured: false },
-  { id: "tunnel-rush",      name: "Tunnel Rush",           image: "/assets/games/tunnel-rush.png",     emoji: "🌀", genre: "Arcade / Speed",      type: "embed", url: "https://poki.com/en/g/tunnel-rush",    featured: false },
-  { id: "run3",             name: "Run 3",                 image: "/assets/games/run3.png",            emoji: "🏃", genre: "Platformer / Endless", type: "embed", url: "https://poki.com/en/g/run-3",         featured: false },
-  { id: "geometry-dash",    name: "Geometry Dash",         image: "/assets/games/geometry-dash.png",   emoji: "🔶", genre: "Rhythm / Platformer", type: "embed", url: "https://poki.com/en/g/geometry-dash",   featured: false },
-  { id: "temple-run2",      name: "Temple Run 2",          image: "/assets/games/temple-run2.png",     emoji: "🏛️", genre: "Endless Runner",      type: "embed", url: "https://poki.com/en/g/temple-run-2",  featured: false },
-  { id: "getaway-shootout", name: "Getaway Shootout",      image: "/assets/games/getaway-shootout.png", emoji: "🤠", genre: "Action / Multiplayer", type: "embed", url: "https://poki.com/en/g/getaway-shootout", featured: false },
-  { id: "basket-random",    name: "Basket Random",         image: "/assets/games/basket-random.jpg",   emoji: "🏀", genre: "Sports / Funny",      type: "embed", url: "https://poki.com/en/g/basket-random",  featured: false },
-  { id: "stickman-hook",    name: "Stickman Hook",         image: "/assets/games/stickman-hook.png",   emoji: "🪝", genre: "Arcade / Swing",      type: "embed", url: "https://poki.com/en/g/stickman-hook",  featured: false },
-  { id: "boxing-random",    name: "Boxing Random",         image: "/assets/games/boxing-random.jpg",   emoji: "🥊", genre: "Sports / Funny",      type: "embed", url: "https://poki.com/en/g/boxing-random",  featured: false },
-  { id: "narrow-one",       name: "Narrow.One",            image: "/assets/games/narrow-one.png",      emoji: "🏹", genre: "Archery / Multiplayer", type: "proxy", url: "https://narrow.one",                featured: false },
+  { id: "fnf",              name: "Friday Night Funkin'", image: "./assets/games/fnf.png",            emoji: "🎤", genre: "Rhythm / Music",      type: "embed", url: "https://fridaynight-funkin.github.io/", featured: false },
+  { id: "crossy-road",      name: "Crossy Road",           image: "./assets/games/crossy-road.png",     emoji: "🐔", genre: "Arcade",              type: "embed", url: "https://poki.com/en/g/crossy-road",    featured: false },
+  { id: "tunnel-rush",      name: "Tunnel Rush",           image: "./assets/games/tunnel-rush.png",     emoji: "🌀", genre: "Arcade / Speed",      type: "embed", url: "https://poki.com/en/g/tunnel-rush",    featured: false },
+  { id: "run3",             name: "Run 3",                 image: "./assets/games/run3.png",            emoji: "🏃", genre: "Platformer / Endless", type: "embed", url: "https://poki.com/en/g/run-3",         featured: false },
+  { id: "geometry-dash",    name: "Geometry Dash",         image: "./assets/games/geometry-dash.png",   emoji: "🔶", genre: "Rhythm / Platformer", type: "embed", url: "https://poki.com/en/g/geometry-dash",   featured: false },
+  { id: "temple-run2",      name: "Temple Run 2",          image: "./assets/games/temple-run2.png",     emoji: "🏛️", genre: "Endless Runner",      type: "embed", url: "https://poki.com/en/g/temple-run-2",  featured: false },
+  { id: "getaway-shootout", name: "Getaway Shootout",      image: "./assets/games/getaway-shootout.png", emoji: "🤠", genre: "Action / Multiplayer", type: "embed", url: "https://poki.com/en/g/getaway-shootout", featured: false },
+  { id: "basket-random",    name: "Basket Random",         image: "./assets/games/basket-random.jpg",   emoji: "🏀", genre: "Sports / Funny",      type: "embed", url: "https://poki.com/en/g/basket-random",  featured: false },
+  { id: "stickman-hook",    name: "Stickman Hook",         image: "./assets/games/stickman-hook.png",   emoji: "🪝", genre: "Arcade / Swing",      type: "embed", url: "https://poki.com/en/g/stickman-hook",  featured: false },
+  { id: "boxing-random",    name: "Boxing Random",         image: "./assets/games/boxing-random.jpg",   emoji: "🥊", genre: "Sports / Funny",      type: "embed", url: "https://poki.com/en/g/boxing-random",  featured: false },
+  { id: "narrow-one",       name: "Narrow.One",            image: "./assets/games/narrow-one.png",      emoji: "🏹", genre: "Archery / Multiplayer", type: "proxy", url: "https://narrow.one",                featured: false },
 ];
 
 // ─── Proxy State ───────────────────────────────────────────────────────────
@@ -156,9 +156,9 @@ async function initProxy() {
 
       // Set up BareMux to route proxy traffic to the local Bare server
       try {
-        const { BareMuxConnection } = await import("/baremux/index.mjs");
-        const { default: BareClient } = await import("/bareasmodule3/index.mjs");
-        const conn = new BareMuxConnection("/baremux/worker.js");
+        const { BareMuxConnection } = await import("./baremux/index.mjs");
+        const { default: BareClient } = await import("./bareasmodule3/index.mjs");
+        const conn = new BareMuxConnection("./baremux/worker.js");
         const client = new BareClient(location.origin + "/bare/");
         await conn.setRemoteTransport(client, "bare-as-module3");
         console.log("[✓] BareMux connected to local Bare server via setRemoteTransport.");
@@ -167,9 +167,9 @@ async function initProxy() {
         console.warn("[!] setRemoteTransport failed, trying setTransport fallback:", remoteErr);
         fetch("/api/log?msg=" + encodeURIComponent("[WARN] setRemoteTransport failed: " + (remoteErr.stack || remoteErr.message))).catch(() => {});
         try {
-          const { BareMuxConnection } = await import("/baremux/index.mjs");
-          const conn = new BareMuxConnection("/baremux/worker.js");
-          await conn.setTransport("/bareasmodule3/index.mjs", [location.origin + "/bare/"]);
+          const { BareMuxConnection } = await import("./baremux/index.mjs");
+          const conn = new BareMuxConnection("./baremux/worker.js");
+          await conn.setTransport("./bareasmodule3/index.mjs", [location.origin + "/bare/"]);
           console.log("[✓] BareMux connected via setTransport fallback.");
         } catch (transportErr) {
           console.error("[✗] BareMux transport failed completely:", transportErr);
