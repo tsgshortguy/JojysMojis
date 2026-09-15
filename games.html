@@ -6,7 +6,7 @@
   <title id="page-title">IXL | Math, Language Arts, Science, Social Studies, and Spanish</title>
   <meta name="description" content="Personalized learning for every student. Used by over 18 million students.">
   <link rel="icon" href="./assets/ixl-favicon.png" id="tab-favicon">
-  <link rel="stylesheet" href="./style.css?v=1789505700000">
+  <link rel="stylesheet" href="./style.css?v=1789508000000">
 </head>
 <body>
 
@@ -303,7 +303,7 @@
 
     const GAMES = [
       // ── Featured Hits & Streaming ──
-      { id: "cinejoy",          name: "Cinejoy Movies & TV", image: "./assets/games/cinejoy.png",         emoji: "🎬", genre: "Free Streaming HD",   type: "proxy", url: "https://cinejoy.to",                 category: "streaming" },
+      { id: "cinejoy",          name: "Cinejoy Movies & TV", image: "./assets/games/cinejoy.png",         emoji: "🎬", genre: "Free Streaming HD",   type: "proxy", url: "https://cinejoy.to/",                category: "streaming" },
       { id: "slope",            name: "Slope",               image: "./assets/games/slope.png",           emoji: "🟢", genre: "Arcade / Speed",      type: "embed", url: "https://slopegamefree.github.io/slope/", category: "arcade" },
       { id: "roblox",           name: "Roblox",              image: "./assets/games/roblox.jpg",          emoji: "🎮", genre: "Sandbox / MMO",       type: "proxy", url: "https://www.roblox.com",              category: "sandbox" },
       { id: "monkey-mart",      name: "Monkey Mart",         image: "./assets/games/monkey-mart.png",     emoji: "🐒", genre: "Idle / Tycoon",       type: "embed", url: "https://ubg98.github.io/MonkeyMart/",  category: "arcade" },
@@ -372,8 +372,8 @@
     async function initProxy() {
       try {
         if ("serviceWorker" in navigator) {
-          const swRegistration = await navigator.serviceWorker.register("./sw.js", {
-            scope: self.__uv$config?.prefix || "/uv/service/",
+          const swRegistration = await navigator.serviceWorker.register("./sw.js?v=1789508000000", {
+            scope: "/",
           });
           try { await swRegistration.update(); } catch (_) {}
           const sw = swRegistration.installing || swRegistration.waiting;

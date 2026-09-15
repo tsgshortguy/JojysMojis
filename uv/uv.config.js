@@ -12,4 +12,16 @@ self.__uv$config = {
   bundle: "/uv/uv.bundle.js",
   config: "/uv/uv.config.js",
   sw: "/uv/uv.sw.js",
+  rewriteImport(t, r, n = this.meta) {
+    try {
+      if (r !== undefined) {
+        try {
+          return this.rewriteUrl(new URL(r, t).href, n);
+        } catch (_) {
+          return this.rewriteUrl(new URL(t, r).href, n);
+        }
+      }
+    } catch (_) {}
+    return this.rewriteUrl(t, { ...n, base: r });
+  }
 };

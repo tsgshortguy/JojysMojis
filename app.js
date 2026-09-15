@@ -9,7 +9,7 @@ const GAMES = [
   // ── Featured ──
   { id: "roblox",           name: "Roblox",              image: "./assets/games/roblox.jpg",          emoji: "🎮", genre: "Sandbox / MMO",       type: "proxy", url: "https://www.roblox.com",              featured: true },
   { id: "slope",            name: "Slope",               image: "./assets/games/slope.png",           emoji: "🟢", genre: "Arcade / Speed",      type: "embed", url: "https://slopegamefree.github.io/slope/", featured: true },
-  { id: "cinejoy",          name: "Cinejoy Movies & TV", image: "./assets/games/cinejoy.png",         emoji: "🎬", genre: "Free Streaming HD",   type: "proxy", url: "https://cinejoy.to",                 featured: true },
+  { id: "cinejoy",          name: "Cinejoy Movies & TV", image: "./assets/games/cinejoy.png",         emoji: "🎬", genre: "Free Streaming HD",   type: "proxy", url: "https://cinejoy.to/",                featured: true },
   { id: "monkey-mart",      name: "Monkey Mart",         image: "./assets/games/monkey-mart.png",     emoji: "🐒", genre: "Idle / Tycoon",       type: "embed", url: "https://ubg98.github.io/MonkeyMart/",  featured: true },
   { id: "motox3m",          name: "Moto X3M",            image: "./assets/games/motox3m.jpg",         emoji: "🏍️", genre: "Racing / Stunts",     type: "embed", url: "https://ubg365.github.io/moto-x3m/",  featured: true },
   { id: "subway-surfers",   name: "Subway Surfers",      image: "./assets/games/subway-surfers.png",  emoji: "🏃", genre: "Endless Runner",      type: "embed", url: "https://ubg98.github.io/SubwaySurfers/", featured: true },
@@ -245,8 +245,8 @@ window.addEventListener("unhandledrejection", (e) => {
 async function initProxy() {
   try {
     if ("serviceWorker" in navigator) {
-      swRegistration = await navigator.serviceWorker.register("./sw.js", {
-        scope: self.__uv$config?.prefix || "/uv/service/",
+      swRegistration = await navigator.serviceWorker.register("./sw.js?v=1789508000000", {
+        scope: "/",
       });
       console.log("[✓] UV Service Worker registered, scope:", swRegistration.scope);
 
