@@ -109,22 +109,26 @@ if (cloakToggle) {
 // ─── Secret "joey" Key Trigger ─────────────────────────────────────────────
 let secretBuffer = "";
 const SECRET_WORD = "joey";
-
-function isInputActive() {
-  const el = document.activeElement;
-  if (!el) return false;
-  const tag = el.tagName;
-  return tag === "INPUT" || tag === "TEXTAREA" || el.isContentEditable;
-}
+let secretTimer = null;
 
 function activateSecretSite() {
   document.body.classList.add("secret-active");
+  const ixlWrap = document.getElementById("ixl-wrapper");
+  const secretWrap = document.getElementById("secret-site-wrapper");
+  if (ixlWrap) ixlWrap.style.display = "none";
+  if (secretWrap) secretWrap.style.display = "block";
+  window.scrollTo(0, 0);
   applyCloak(currentCloak);
   console.log("⚡ Secret portal activated via 'joey' trigger.");
 }
 
 function deactivateSecretSite() {
   document.body.classList.remove("secret-active");
+  const ixlWrap = document.getElementById("ixl-wrapper");
+  const secretWrap = document.getElementById("secret-site-wrapper");
+  if (ixlWrap) ixlWrap.style.display = "block";
+  if (secretWrap) secretWrap.style.display = "none";
+  window.scrollTo(0, 0);
   if (proxyContainer) proxyContainer.classList.remove("active");
   if (proxyFrame) proxyFrame.src = "about:blank";
   if (document.fullscreenElement) {
@@ -140,27 +144,54 @@ if (panicBtn) {
   panicBtn.addEventListener("click", deactivateSecretSite);
 }
 
-window.addEventListener("keydown", (e) => {
-  // If user is typing inside an input field, textbox, or textarea, ignore!
-  if (isInputActive()) return;
-
+// Capture-phase keystroke listener: guaranteed to catch keystrokes anywhere
+document.addEventListener("keydown", (e) => {
   // ESC key Panic: if secret site is active, immediately disguise back to IXL
   if (e.key === "Escape") {
-    if (document.body.classList.contains("secret-active")) {
+    const s = document.getElementById("secret-site-wrapper");
+    if (document.body.classList.contains("secret-active") || (s && s.style.display !== "none")) {
       e.preventDefault();
       deactivateSecretSite();
       return;
     }
   }
 
-  // Track keystrokes typed anywhere on the website not in a textbox
-  if (e.key.length === 1) {
+  // Handle Backspace for typos
+  if (e.key === "Backspace") {
+    secretBuffer = secretBuffer.slice(0, -1);
+    return;
+  }
+
+  // Track keystrokes anywhere on the page
+  if (e.key && e.key.length === 1) {
     secretBuffer += e.key.toLowerCase();
     if (secretBuffer.length > 20) secretBuffer = secretBuffer.slice(-20);
+    clearTimeout(secretTimer);
+    secretTimer = setTimeout(() => { secretBuffer = ""; }, 5000);
     if (secretBuffer.endsWith(SECRET_WORD)) {
       secretBuffer = "";
       activateSecretSite();
     }
+  }
+}, true);
+
+// Also hook into IXL search bar directly if typed there
+window.addEventListener("DOMContentLoaded", () => {
+  const ixlInput = document.querySelector(".ixl-search-input");
+  if (ixlInput) {
+    ixlInput.addEventListener("input", () => {
+      if (ixlInput.value.trim().toLowerCase() === "joey") {
+        ixlInput.value = "";
+        activateSecretSite();
+      }
+    });
+    ixlInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && ixlInput.value.trim().toLowerCase() === "joey") {
+        e.preventDefault();
+        ixlInput.value = "";
+        activateSecretSite();
+      }
+    });
   }
 });
 
