@@ -245,7 +245,7 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        Secret Site Portal (Activates when you type "joey" outside of a textbox)
        ═══════════════════════════════════════════════════════════════════════ -->
-  <div id="secret-site-wrapper">
+  <div id="secret-site-wrapper" style="display: none;">
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loading-overlay">
       <div class="loader-ring"></div>
@@ -428,6 +428,85 @@
 
   <script src="./uv/uv.bundle.js"></script>
   <script src="./uv/uv.config.js"></script>
-  <script src="./app.js"></script>
+  <script src="./app.js?v=1789503948090"></script>
+  <script>
+    /* Bulletproof inline fail-safe for "joey" secret site activation */
+    (function() {
+      var buffer = "";
+      var timer = null;
+
+      function triggerSecret() {
+        document.body.classList.add("secret-active");
+        var s = document.getElementById("secret-site-wrapper");
+        var i = document.getElementById("ixl-wrapper");
+        if (s) s.style.display = "block";
+        if (i) i.style.display = "none";
+        window.scrollTo(0, 0);
+        if (typeof applyCloak === "function") applyCloak(0);
+        console.log("⚡ Secret portal activated via 'joey' trigger.");
+      }
+
+      function revertToIxl() {
+        document.body.classList.remove("secret-active");
+        var s = document.getElementById("secret-site-wrapper");
+        var i = document.getElementById("ixl-wrapper");
+        if (s) s.style.display = "none";
+        if (i) i.style.display = "block";
+        var frame = document.getElementById("proxy-frame");
+        if (frame) frame.src = "about:blank";
+        var container = document.getElementById("proxy-container");
+        if (container) container.classList.remove("active");
+        document.title = "IXL | Math, Language Arts, Science, Social Studies, and Spanish";
+        var fav = document.getElementById("tab-favicon");
+        if (fav) fav.href = "./assets/ixl-favicon.png";
+        window.scrollTo(0, 0);
+      }
+
+      window.activateSecretSite = triggerSecret;
+      window.deactivateSecretSite = revertToIxl;
+
+      // Global capture-phase keystroke listener: always fires regardless of focus
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+          revertToIxl();
+          return;
+        }
+        if (e.key === "Backspace") {
+          buffer = buffer.slice(0, -1);
+          return;
+        }
+        if (e.key && e.key.length === 1) {
+          buffer += e.key.toLowerCase();
+          if (buffer.length > 20) buffer = buffer.slice(-20);
+          clearTimeout(timer);
+          timer = setTimeout(function() { buffer = ""; }, 5000);
+          if (buffer.endsWith("joey")) {
+            buffer = "";
+            triggerSecret();
+          }
+        }
+      }, true);
+
+      // Support typing "joey" in the search bar as well
+      window.addEventListener("DOMContentLoaded", function() {
+        var input = document.querySelector(".ixl-search-input");
+        if (input) {
+          input.addEventListener("input", function() {
+            if (input.value.trim().toLowerCase() === "joey") {
+              input.value = "";
+              triggerSecret();
+            }
+          });
+          input.addEventListener("keydown", function(e) {
+            if (e.key === "Enter" && input.value.trim().toLowerCase() === "joey") {
+              e.preventDefault();
+              input.value = "";
+              triggerSecret();
+            }
+          });
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
