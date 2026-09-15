@@ -78,7 +78,10 @@ const proxyHistFwd   = document.getElementById("proxy-history-forward");
 const proxyFull      = document.getElementById("proxy-fullscreen");
 const proxyPopout    = document.getElementById("proxy-popout");
 
-// ─── Tab Cloaking ──────────────────────────────────────────────────────────
+// ─── IXL Disguise & Tab Cloaking ───────────────────────────────────────────
+const IXL_TITLE = "IXL | Math, Language Arts, Science, Social Studies, and Spanish";
+const IXL_FAVICON = "./assets/ixl-favicon.png";
+
 const CLOAKS = [
   { title: "Google Docs",   icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" },
   { title: "Google Drive",  icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" },
@@ -88,14 +91,13 @@ const CLOAKS = [
 let currentCloak = 0;
 
 function applyCloak(index) {
+  if (!document.body.classList.contains("secret-active")) return;
   const cloak = CLOAKS[index];
   document.title = cloak.title;
   const favicon = document.getElementById("tab-favicon");
   if (favicon) favicon.href = cloak.icon;
   if (cloakText) cloakText.textContent = `Cloaked as ${cloak.title}`;
 }
-
-applyCloak(0);
 
 if (cloakToggle) {
   cloakToggle.addEventListener("click", () => {
@@ -104,22 +106,102 @@ if (cloakToggle) {
   });
 }
 
-// ─── Panic Button (ESC key or button click) ────────────────────────────────
-const PANIC_URL = "https://docs.google.com/document/u/0/";
+// ─── Secret "joey" Key Trigger ─────────────────────────────────────────────
+let secretBuffer = "";
+const SECRET_WORD = "joey";
 
-function triggerPanic() {
-  // Replace current page entirely — no back button trace
-  window.location.replace(PANIC_URL);
+function isInputActive() {
+  const el = document.activeElement;
+  if (!el) return false;
+  const tag = el.tagName;
+  return tag === "INPUT" || tag === "TEXTAREA" || el.isContentEditable;
 }
 
-if (panicBtn) panicBtn.addEventListener("click", triggerPanic);
+function activateSecretSite() {
+  document.body.classList.add("secret-active");
+  applyCloak(currentCloak);
+  console.log("⚡ Secret portal activated via 'joey' trigger.");
+}
 
-document.addEventListener("keydown", (e) => {
+function deactivateSecretSite() {
+  document.body.classList.remove("secret-active");
+  if (proxyContainer) proxyContainer.classList.remove("active");
+  if (proxyFrame) proxyFrame.src = "about:blank";
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(() => {});
+  }
+  // Restore IXL Title & Favicon
+  document.title = IXL_TITLE;
+  const favicon = document.getElementById("tab-favicon");
+  if (favicon) favicon.href = IXL_FAVICON;
+}
+
+if (panicBtn) {
+  panicBtn.addEventListener("click", deactivateSecretSite);
+}
+
+window.addEventListener("keydown", (e) => {
+  // If user is typing inside an input field, textbox, or textarea, ignore!
+  if (isInputActive()) return;
+
+  // ESC key Panic: if secret site is active, immediately disguise back to IXL
   if (e.key === "Escape") {
-    e.preventDefault();
-    triggerPanic();
+    if (document.body.classList.contains("secret-active")) {
+      e.preventDefault();
+      deactivateSecretSite();
+      return;
+    }
+  }
+
+  // Track keystrokes typed anywhere on the website not in a textbox
+  if (e.key.length === 1) {
+    secretBuffer += e.key.toLowerCase();
+    if (secretBuffer.length > 20) secretBuffer = secretBuffer.slice(-20);
+    if (secretBuffer.endsWith(SECRET_WORD)) {
+      secretBuffer = "";
+      activateSecretSite();
+    }
   }
 });
+
+// IXL Question Interaction
+window.openIxlQuestion = function(problem, answer) {
+  const modal = document.getElementById("ixl-modal");
+  const qBody = document.getElementById("ixl-q-body");
+  const feedback = document.getElementById("ixl-feedback");
+  const ansInput = document.getElementById("ixl-ans");
+  if (modal && qBody) {
+    qBody.textContent = problem;
+    modal.dataset.expected = answer;
+    if (feedback) feedback.textContent = "";
+    if (ansInput) { ansInput.value = ""; ansInput.focus(); }
+    modal.style.display = "flex";
+  }
+};
+
+window.closeIxlQuestion = function() {
+  const modal = document.getElementById("ixl-modal");
+  if (modal) modal.style.display = "none";
+};
+
+window.submitIxlAnswer = function() {
+  const modal = document.getElementById("ixl-ans");
+  const ansInput = document.getElementById("ixl-ans");
+  const feedback = document.getElementById("ixl-feedback");
+  const modalEl = document.getElementById("ixl-modal");
+  if (!modalEl || !ansInput || !feedback) return;
+  const userVal = ansInput.value.trim();
+  if (!userVal) {
+    feedback.textContent = "Please enter an answer.";
+    feedback.style.color = "#e53e3e";
+    return;
+  }
+  feedback.textContent = "✓ Brilliant! SmartScore increased to 96.";
+  feedback.style.color = "#2e7d32";
+  setTimeout(() => {
+    modalEl.style.display = "none";
+  }, 1200);
+};
 
 // Global browser error logging
 window.addEventListener("error", (e) => {

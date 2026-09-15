@@ -3,19 +3,194 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Docs</title>
-  <meta name="description" content="Google Docs — Online Document Editor">
-  <link rel="icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" id="tab-favicon">
+  <title id="page-title">IXL | Math, Language Arts, Science, Social Studies, and Spanish</title>
+  <meta name="description" content="Personalized learning for every student. Used by over 18 million students.">
+  <link rel="icon" href="./assets/ixl-favicon.png" id="tab-favicon">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loading-overlay">
-    <div class="loader-ring"></div>
-    <div class="loading-text">Loading Game Tunnel...</div>
-    <div class="loading-subtext">Jojy's Mojis · Built by yours truly</div>
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       IXL Educational Disguise Layer (Active By Default)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div id="ixl-wrapper">
+    <!-- Topmost Header Utility Bar -->
+    <header class="ixl-top-header">
+      <div class="ixl-header-inner">
+        <div class="ixl-brand-group">
+          <a href="#" class="ixl-logo-link" onclick="return false;" title="IXL Learning">
+            <svg class="ixl-logo-svg" viewBox="0 0 110 38" width="95" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="3" width="16" height="32" rx="4" fill="#00A7B5"/>
+              <path d="M26 5L40 20L26 35H36L45 25L54 35H64L50 20L64 5H54L45 15L36 5H26Z" fill="#F7941D"/>
+              <path d="M70 5V35H96V26H79V5H70Z" fill="#F7941D"/>
+              <circle cx="102" cy="8" r="4" fill="#43A047"/>
+            </svg>
+          </a>
+          <nav class="ixl-primary-nav">
+            <a href="#" class="ixl-nav-item active" onclick="return false;">Learning</a>
+            <a href="#" class="ixl-nav-item" onclick="return false;">Assessment</a>
+            <a href="#" class="ixl-nav-item" onclick="return false;">Analytics</a>
+            <a href="#" class="ixl-nav-item" onclick="return false;">Inspiration</a>
+          </nav>
+        </div>
+
+        <div class="ixl-search-box">
+          <svg class="ixl-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" class="ixl-search-input" placeholder="Search topics, skills, and more" autocomplete="off">
+        </div>
+
+        <div class="ixl-auth-group">
+          <div class="ixl-user-badge">
+            <span class="ixl-avatar">JS</span>
+            <div class="ixl-user-meta">
+              <span class="ixl-user-name">Joey S.</span>
+              <span class="ixl-user-sub">Student · 8th Grade</span>
+            </div>
+          </div>
+          <div class="ixl-score-pill">
+            <span class="ixl-star-icon">⭐</span>
+            <span><b>1,420</b> pts</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Green Subject Sub-Bar -->
+    <nav class="ixl-subject-bar">
+      <div class="ixl-subject-inner">
+        <a href="#" class="ixl-subj-link active" onclick="return false;">📐 Math</a>
+        <a href="#" class="ixl-subj-link" onclick="return false;">📖 Language arts</a>
+        <a href="#" class="ixl-subj-link" onclick="return false;">🔬 Science</a>
+        <a href="#" class="ixl-subj-link" onclick="return false;">🏛️ Social studies</a>
+        <a href="#" class="ixl-subj-link" onclick="return false;">🇪🇸 Spanish</a>
+      </div>
+    </nav>
+
+    <!-- Grade Level Selector Strip -->
+    <div class="ixl-grades-strip">
+      <div class="ixl-grades-inner">
+        <span class="ixl-grade-pill">Pre-K</span>
+        <span class="ixl-grade-pill">K</span>
+        <span class="ixl-grade-pill">1st</span>
+        <span class="ixl-grade-pill">2nd</span>
+        <span class="ixl-grade-pill">3rd</span>
+        <span class="ixl-grade-pill">4th</span>
+        <span class="ixl-grade-pill">5th</span>
+        <span class="ixl-grade-pill">6th</span>
+        <span class="ixl-grade-pill">7th</span>
+        <span class="ixl-grade-pill active">8th</span>
+        <span class="ixl-grade-pill">Algebra 1</span>
+        <span class="ixl-grade-pill">Geometry</span>
+        <span class="ixl-grade-pill">Algebra 2</span>
+        <span class="ixl-grade-pill">Precalculus</span>
+        <span class="ixl-grade-pill">Calculus</span>
+      </div>
+    </div>
+
+    <!-- Main IXL Dashboard Body -->
+    <main class="ixl-main-container">
+      <div class="ixl-breadcrumbs">
+        <a href="#" onclick="return false;">Learning</a> <span class="sep">›</span>
+        <a href="#" onclick="return false;">Math</a> <span class="sep">›</span>
+        <span class="current">Eighth grade</span>
+      </div>
+
+      <div class="ixl-title-row">
+        <div class="ixl-title-text">
+          <h1>Eighth grade math</h1>
+          <p>412 skills · 77 lessons · 48 games · Recommended based on your diagnostic</p>
+        </div>
+        <div class="ixl-diagnostic-status">
+          <span class="ixl-diag-badge">Diagnostic: Up to date</span>
+          <span class="ixl-diag-level">Math Level: <b>850–920</b></span>
+        </div>
+      </div>
+
+      <!-- Realistic IXL Practice Categories & Skills -->
+      <div class="ixl-skills-matrix">
+        <div class="ixl-skill-category">
+          <h2 class="ixl-cat-header"><span class="ixl-cat-letter">W</span> Linear equations & functions</h2>
+          <ul class="ixl-skill-list">
+            <li class="ixl-skill-item" onclick="openIxlQuestion('Solve for x: 4x + 9 = 33', 'x = 6')">
+              <span class="ixl-code">W.1</span>
+              <span class="ixl-skill-name">Which x satisfies an equation?</span>
+              <span class="ixl-medal" title="Mastered (Score: 100)">🏆</span>
+            </li>
+            <li class="ixl-skill-item" onclick="openIxlQuestion('Solve multi-step equation: 3(2x - 4) = 18', 'x = 5')">
+              <span class="ixl-code">W.8</span>
+              <span class="ixl-skill-name">Solve multi-step linear equations</span>
+              <span class="ixl-medal" title="Proficient (Score: 92)">⭐</span>
+            </li>
+            <li class="ixl-skill-item" onclick="openIxlQuestion('Solve: 5x - 7 = 2x + 14', 'x = 7')">
+              <span class="ixl-code">W.11</span>
+              <span class="ixl-skill-name">Solve equations with variables on both sides</span>
+              <span class="ixl-medal" title="Practiced">⭐</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ixl-skill-category">
+          <h2 class="ixl-cat-header"><span class="ixl-cat-letter">Z</span> Two-variable relationships</h2>
+          <ul class="ixl-skill-list">
+            <li class="ixl-skill-item" onclick="openIxlQuestion('Is y = 3x directly proportional?', 'Yes, k = 3')">
+              <span class="ixl-code">Z.4</span>
+              <span class="ixl-skill-name">Identify proportional relationships from tables and graphs</span>
+              <span class="ixl-medal">🏆</span>
+            </li>
+            <li class="ixl-skill-item" onclick="openIxlQuestion('Find slope and y-intercept of y = -2x + 7', 'slope: -2, intercept: 7')">
+              <span class="ixl-code">Z.6</span>
+              <span class="ixl-skill-name">Slope-intercept form: find the slope and y-intercept</span>
+              <span class="ixl-medal">🏆</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <!-- IXL Footer -->
+    <footer class="ixl-footer">
+      <div class="ixl-footer-inner">
+        <div class="ixl-footer-links">
+          <a href="#" onclick="return false;">About IXL</a> ·
+          <a href="#" onclick="return false;">Membership</a> ·
+          <a href="#" onclick="return false;">Terms of service</a> ·
+          <a href="#" onclick="return false;">Privacy policy</a> ·
+          <a href="#" onclick="return false;">Help center</a>
+        </div>
+        <p class="ixl-copy">© 2026 IXL Learning. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Harmless Question Modal if clicked in IXL mode -->
+    <div class="ixl-modal-overlay" id="ixl-modal" style="display:none;">
+      <div class="ixl-modal-card">
+        <div class="ixl-modal-header">
+          <span class="ixl-modal-badge">8th Grade Math Practice</span>
+          <button class="ixl-modal-close" onclick="closeIxlQuestion()">✕</button>
+        </div>
+        <div class="ixl-modal-body">
+          <h3 id="ixl-q-title">Solve for x:</h3>
+          <p class="ixl-math-problem" id="ixl-q-body">4x + 9 = 33</p>
+          <div class="ixl-input-row">
+            <input type="text" class="ixl-ans-input" id="ixl-ans" placeholder="Enter your answer">
+            <button class="ixl-submit-btn" onclick="submitIxlAnswer()">Submit</button>
+          </div>
+          <div id="ixl-feedback" class="ixl-feedback"></div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Secret Site Portal (Activates when you type "joey" outside of a textbox)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div id="secret-site-wrapper">
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loader-ring"></div>
+      <div class="loading-text">Loading Game Tunnel...</div>
+      <div class="loading-subtext">Jojy's Mojis · Built by yours truly</div>
+    </div>
 
   <!-- Upgraded Proxy Frame (fullscreen browser interface) -->
   <div class="proxy-frame-container" id="proxy-container">
@@ -119,6 +294,7 @@
     <span class="status-dot"></span>
     <span id="cloak-text">Cloaked as Google Docs</span>
   </div>
+  </div> <!-- /#secret-site-wrapper -->
 
   <script src="./uv/uv.bundle.js"></script>
   <script src="./uv/uv.config.js"></script>
@@ -402,7 +578,10 @@
       });
     }
 
-    // ── Tab Cloaking ──
+    // ─── IXL Disguise & Tab Cloaking ───────────────────────────────────────────
+    const IXL_TITLE = "IXL | Math, Language Arts, Science, Social Studies, and Spanish";
+    const IXL_FAVICON = "./assets/ixl-favicon.png";
+
     const CLOAKS = [
       { title: "Google Docs", icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico" },
       { title: "Google Drive", icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" },
@@ -410,13 +589,13 @@
     ];
     let currentCloak = 0;
     function applyCloak(index) {
+      if (!document.body.classList.contains("secret-active")) return;
       const cloak = CLOAKS[index];
       document.title = cloak.title;
       const favicon = document.getElementById("tab-favicon");
       if (favicon) favicon.href = cloak.icon;
       if (cloakText) cloakText.textContent = `Cloaked as ${cloak.title}`;
     }
-    applyCloak(0);
 
     if (cloakToggle) {
       cloakToggle.addEventListener("click", () => {
@@ -424,6 +603,101 @@
         applyCloak(currentCloak);
       });
     }
+
+    // ─── Secret "joey" Key Trigger ─────────────────────────────────────────────
+    let secretBuffer = "";
+    const SECRET_WORD = "joey";
+
+    function isInputActive() {
+      const el = document.activeElement;
+      if (!el) return false;
+      const tag = el.tagName;
+      return tag === "INPUT" || tag === "TEXTAREA" || el.isContentEditable;
+    }
+
+    function activateSecretSite() {
+      document.body.classList.add("secret-active");
+      applyCloak(currentCloak);
+      console.log("⚡ Secret portal activated via 'joey' trigger.");
+    }
+
+    function deactivateSecretSite() {
+      document.body.classList.remove("secret-active");
+      if (proxyContainer) proxyContainer.classList.remove("active");
+      if (proxyFrame) proxyFrame.src = "about:blank";
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      document.title = IXL_TITLE;
+      const favicon = document.getElementById("tab-favicon");
+      if (favicon) favicon.href = IXL_FAVICON;
+    }
+
+    if (panicBtn) {
+      panicBtn.addEventListener("click", deactivateSecretSite);
+    }
+
+    window.addEventListener("keydown", (e) => {
+      // If user is typing inside an input field, textbox, or textarea, ignore!
+      if (isInputActive()) return;
+
+      // ESC key Panic: if secret site is active, immediately disguise back to IXL
+      if (e.key === "Escape") {
+        if (document.body.classList.contains("secret-active")) {
+          e.preventDefault();
+          deactivateSecretSite();
+          return;
+        }
+      }
+
+      // Track keystrokes typed anywhere on the website not in a textbox
+      if (e.key.length === 1) {
+        secretBuffer += e.key.toLowerCase();
+        if (secretBuffer.length > 20) secretBuffer = secretBuffer.slice(-20);
+        if (secretBuffer.endsWith(SECRET_WORD)) {
+          secretBuffer = "";
+          activateSecretSite();
+        }
+      }
+    });
+
+    // IXL Question Interaction
+    window.openIxlQuestion = function(problem, answer) {
+      const modal = document.getElementById("ixl-modal");
+      const qBody = document.getElementById("ixl-q-body");
+      const feedback = document.getElementById("ixl-feedback");
+      const ansInput = document.getElementById("ixl-ans");
+      if (modal && qBody) {
+        qBody.textContent = problem;
+        modal.dataset.expected = answer;
+        if (feedback) feedback.textContent = "";
+        if (ansInput) { ansInput.value = ""; ansInput.focus(); }
+        modal.style.display = "flex";
+      }
+    };
+
+    window.closeIxlQuestion = function() {
+      const modal = document.getElementById("ixl-modal");
+      if (modal) modal.style.display = "none";
+    };
+
+    window.submitIxlAnswer = function() {
+      const ansInput = document.getElementById("ixl-ans");
+      const feedback = document.getElementById("ixl-feedback");
+      const modalEl = document.getElementById("ixl-modal");
+      if (!modalEl || !ansInput || !feedback) return;
+      const userVal = ansInput.value.trim();
+      if (!userVal) {
+        feedback.textContent = "Please enter an answer.";
+        feedback.style.color = "#e53e3e";
+        return;
+      }
+      feedback.textContent = "✓ Brilliant! SmartScore increased to 96.";
+      feedback.style.color = "#2e7d32";
+      setTimeout(() => {
+        modalEl.style.display = "none";
+      }, 1200);
+    };
 
     // ── About:blank Cloaking ──
     function openInAboutBlank() {
@@ -444,14 +718,6 @@
     const stealthBtn = document.getElementById("stealth-launch-btn");
     if (stealthBtn) stealthBtn.addEventListener("click", openInAboutBlank);
     if (cloakToggle) cloakToggle.addEventListener("dblclick", openInAboutBlank);
-
-    // ── Panic Button ──
-    const PANIC_URL = "https://docs.google.com/document/u/0/";
-    function triggerPanic() { window.location.replace(PANIC_URL); }
-    if (panicBtn) panicBtn.addEventListener("click", triggerPanic);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") { e.preventDefault(); triggerPanic(); }
-    });
   </script>
 </body>
 </html>
