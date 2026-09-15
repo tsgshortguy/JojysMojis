@@ -2,10 +2,10 @@
  * Service Worker bootstrap for Ultraviolet.
  * This file gets registered as the service worker and imports the UV SW bundle.
  */
-importScripts("./baremux/index.js?v=1789504454873");
-importScripts("./uv/uv.bundle.js?v=1789504454873");
-importScripts("./uv/uv.config.js?v=1789504454873");
-importScripts("./uv/uv.sw.js?v=1789504454873");
+importScripts("./baremux/index.js?v=1789505700000");
+importScripts("./uv/uv.bundle.js?v=1789505700000");
+importScripts("./uv/uv.config.js?v=1789505700000");
+importScripts("./uv/uv.sw.js?v=1789505700000");
 
 self.addEventListener("install", () => {
   self.skipWaiting();

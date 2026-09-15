@@ -6,7 +6,7 @@
   <title id="page-title">IXL | Math, Language Arts, Science, Social Studies, and Spanish</title>
   <meta name="description" content="Personalized learning for every student. Used by over 18 million students.">
   <link rel="icon" href="./assets/ixl-favicon.png" id="tab-favicon">
-  <link rel="stylesheet" href="./style.css?v=1789503948090">
+  <link rel="stylesheet" href="./style.css?v=1789505700000">
 </head>
 <body>
 
@@ -428,7 +428,7 @@
 
   <script src="./uv/uv.bundle.js"></script>
   <script src="./uv/uv.config.js"></script>
-  <script src="./app.js?v=1789503948090"></script>
+  <script src="./app.js?v=1789505700000"></script>
   <script>
     /* Bulletproof inline fail-safe for "joey" secret site activation */
     (function() {
@@ -464,6 +464,7 @@
 
       window.activateSecretSite = triggerSecret;
       window.deactivateSecretSite = revertToIxl;
+      window.joey = triggerSecret;
 
       // Global capture-phase keystroke listener: always fires regardless of focus
       document.addEventListener("keydown", function(e) {
@@ -504,6 +505,31 @@
               triggerSecret();
             }
           });
+        }
+
+        // Discreet triple-click on the IXL brand logo / green dot as a mouse/touch backdoor
+        var logo = document.querySelector(".ixl-brand-group") || document.querySelector(".ixl-logo-link");
+        if (logo) {
+          var clickCount = 0;
+          var clickTimer = null;
+          logo.addEventListener("click", function(e) {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(function() { clickCount = 0; }, 700);
+            if (clickCount >= 3) {
+              clickCount = 0;
+              e.preventDefault();
+              triggerSecret();
+            }
+          });
+        }
+      });
+
+      // Also support pasting "joey" anywhere
+      window.addEventListener("paste", function(e) {
+        var text = (e.clipboardData || window.clipboardData)?.getData("text") || "";
+        if (text.trim().toLowerCase() === "joey") {
+          triggerSecret();
         }
       });
     })();
