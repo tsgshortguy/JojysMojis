@@ -10,19 +10,6 @@
 </head>
 <body>
 
-  <!-- Top Info Ticker -->
-  <div class="top-ticker">
-    <span class="ticker-highlight"><span class="ticker-dot"></span> BUILT BY YOURS TRULY</span>
-    <span>·</span>
-    <span style="font-weight: 700; color: var(--red-bright);">⚡ JOJY'S MOJIS</span>
-    <span>·</span>
-    <span>🎮 30+ UNBLOCKED GAMES</span>
-    <span>·</span>
-    <span>🚀 ULTRAVIOLET V3 ENGINE</span>
-    <span>·</span>
-    <span>PRESS <b style="color:#fff">ESC</b> TO PANIC</span>
-  </div>
-
   <!-- Loading Overlay -->
   <div class="loading-overlay" id="loading-overlay">
     <div class="loader-ring"></div>
@@ -34,18 +21,32 @@
   <div class="proxy-frame-container" id="proxy-container">
     <div class="proxy-toolbar">
       <div class="proxy-nav-btns">
-        <button class="tb-btn tb-btn-close" id="proxy-back" title="Exit Game (Back to Library)">✕</button>
-        <button class="tb-btn" id="proxy-history-back" title="History Back">←</button>
-        <button class="tb-btn" id="proxy-history-forward" title="History Forward">→</button>
-        <button class="tb-btn" id="proxy-refresh" title="Reload Page">↻</button>
+        <button class="tb-btn tb-btn-close" id="proxy-back" title="Exit Game (Back to Library)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <button class="tb-btn" id="proxy-history-back" title="History Back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <button class="tb-btn" id="proxy-history-forward" title="History Forward">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+        <button class="tb-btn" id="proxy-refresh" title="Reload Page">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        </button>
       </div>
       <div class="proxy-url-wrap">
-        <span class="proxy-ssl-icon" title="Secure Encrypted Proxy">🔒</span>
+        <span class="proxy-ssl-icon" title="Secure Encrypted Proxy">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </span>
         <input class="proxy-url-bar" id="proxy-url-display" placeholder="Enter URL or search..." autocomplete="off" spellcheck="false">
       </div>
       <div class="proxy-nav-btns">
-        <button class="tb-btn" id="proxy-fullscreen" title="Toggle Fullscreen">⛶</button>
-        <button class="tb-btn" id="proxy-popout" title="Open in about:blank tab">↗</button>
+        <button class="tb-btn" id="proxy-fullscreen" title="Toggle Fullscreen">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        </button>
+        <button class="tb-btn" id="proxy-popout" title="Open in about:blank tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </button>
       </div>
     </div>
     <iframe class="proxy-frame" id="proxy-frame" allow="autoplay; camera; microphone; clipboard-read; clipboard-write; fullscreen; display-capture; web-share; gamepad; xr-spatial-tracking" allowfullscreen></iframe>
@@ -66,16 +67,24 @@
       <ul class="nav-links">
         <li><a href="./index.html">Home</a></li>
         <li><a href="./games.html" class="active">Game Library</a></li>
-        <li><button class="stealth-btn" id="stealth-launch-btn" title="Open in about:blank (Invisible to Lightspeed)">👻 STEALTH (about:blank)</button></li>
-        <li><button class="panic-btn" id="panic-btn" title="Press ESC to panic">ESC → PANIC</button></li>
+        <li>
+          <button class="stealth-btn" id="stealth-launch-btn" title="Open in about:blank (Invisible to Lightspeed)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span>Stealth</span>
+          </button>
+        </li>
+        <li>
+          <button class="panic-btn" id="panic-btn" title="Press ESC to panic">
+            <span class="panic-dot"></span>
+            <span>Panic</span>
+            <kbd>ESC</kbd>
+          </button>
+        </li>
       </ul>
     </nav>
 
     <!-- Games Page Hero -->
     <section class="hero fade-in fade-in-delay-1" style="padding: 20px 0 30px;">
-      <div class="hero-pill">
-        <span>🎮</span> Built by yours truly · Jojy's Mojis Arcade & Streaming
-      </div>
       <h1>Game & Stream <span class="accent">Library</span></h1>
       <p>39 unblocked games & streaming channels ready to launch with zero restrictions. Click any card to play in high-speed stealth mode.</p>
     </section>
@@ -206,7 +215,9 @@
           }
           try {
             const { BareMuxConnection } = await import("./baremux/index.mjs");
-            const conn = new BareMuxConnection("./baremux/worker.js");
+            const workerUrl = new URL("./baremux/worker.js", location.href).href;
+            const epoxyUrl = new URL("./epoxy/index.mjs", location.href).href;
+            const conn = new BareMuxConnection(workerUrl);
             const hasLocalBare = location.port && (location.hostname === "localhost" || location.hostname === "127.0.0.1");
 
             if (hasLocalBare) {
@@ -217,12 +228,17 @@
                 console.log("[✓] BareMux connected to local Bare server.");
               } catch (localErr) {
                 console.warn("[!] Local Bare failed, connecting to Wisp tunnel via Epoxy:", localErr);
-                await conn.setTransport("./epoxy/index.mjs", [{ wisp: "wss://wisp.mercurywork.shop/" }]);
+                await conn.setTransport(epoxyUrl, [{ wisp: "wss://wisp.mercurywork.shop/" }]);
               }
             } else {
               // Cloud / Custom domain / GitHub Pages: Connect to high-speed Wisp WebSocket tunnel!
-              await conn.setTransport("./epoxy/index.mjs", [{ wisp: "wss://wisp.mercurywork.shop/" }]);
-              console.log("[✓] BareMux connected to Wisp tunnel (wss://wisp.mercurywork.shop/) via Epoxy.");
+              try {
+                await conn.setTransport(epoxyUrl, [{ wisp: "wss://wisp.mercurywork.shop/" }]);
+                console.log("[✓] BareMux connected to primary Wisp tunnel via Epoxy.");
+              } catch (wispErr) {
+                console.warn("[!] Primary Wisp failed, trying backup tunnel:", wispErr);
+                await conn.setTransport(epoxyUrl, [{ wisp: "wss://flow-works.me/wisp/" }]);
+              }
             }
           } catch (transportErr) {
             console.error("[✗] BareMux transport setup failed:", transportErr);

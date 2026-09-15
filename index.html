@@ -10,19 +10,6 @@
 </head>
 <body>
 
-  <!-- Top Info Ticker -->
-  <div class="top-ticker">
-    <span class="ticker-highlight"><span class="ticker-dot"></span> BUILT BY YOURS TRULY</span>
-    <span>·</span>
-    <span style="font-weight: 700; color: var(--red-bright);">⚡ JOJY'S MOJIS</span>
-    <span>·</span>
-    <span>🚀 ULTRAVIOLET V3 ENGINE</span>
-    <span>·</span>
-    <span>🔒 STEALTH ENCRYPTED TUNNEL</span>
-    <span>·</span>
-    <span>PRESS <b style="color:#fff">ESC</b> TO PANIC</span>
-  </div>
-
   <!-- Loading Overlay -->
   <div class="loading-overlay" id="loading-overlay">
     <div class="loader-ring"></div>
@@ -34,18 +21,32 @@
   <div class="proxy-frame-container" id="proxy-container">
     <div class="proxy-toolbar">
       <div class="proxy-nav-btns">
-        <button class="tb-btn tb-btn-close" id="proxy-back" title="Exit Proxy (Back to Home)">✕</button>
-        <button class="tb-btn" id="proxy-history-back" title="History Back">←</button>
-        <button class="tb-btn" id="proxy-history-forward" title="History Forward">→</button>
-        <button class="tb-btn" id="proxy-refresh" title="Reload Page">↻</button>
+        <button class="tb-btn tb-btn-close" id="proxy-back" title="Exit Proxy (Back to Home)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <button class="tb-btn" id="proxy-history-back" title="History Back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <button class="tb-btn" id="proxy-history-forward" title="History Forward">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+        <button class="tb-btn" id="proxy-refresh" title="Reload Page">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        </button>
       </div>
       <div class="proxy-url-wrap">
-        <span class="proxy-ssl-icon" title="Secure Encrypted Proxy">🔒</span>
+        <span class="proxy-ssl-icon" title="Secure Encrypted Proxy">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </span>
         <input class="proxy-url-bar" id="proxy-url-display" placeholder="Enter URL or search..." autocomplete="off" spellcheck="false">
       </div>
       <div class="proxy-nav-btns">
-        <button class="tb-btn" id="proxy-fullscreen" title="Toggle Fullscreen">⛶</button>
-        <button class="tb-btn" id="proxy-popout" title="Open in about:blank tab">↗</button>
+        <button class="tb-btn" id="proxy-fullscreen" title="Toggle Fullscreen">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        </button>
+        <button class="tb-btn" id="proxy-popout" title="Open in about:blank tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </button>
       </div>
     </div>
     <iframe class="proxy-frame" id="proxy-frame" allow="autoplay; camera; microphone; clipboard-read; clipboard-write; fullscreen; display-capture; web-share; gamepad; xr-spatial-tracking" allowfullscreen></iframe>
@@ -66,22 +67,32 @@
       <ul class="nav-links">
         <li><a href="./index.html" class="active">Home</a></li>
         <li><a href="./games.html">Game Library</a></li>
-        <li><button class="stealth-btn" id="stealth-launch-btn" title="Open in about:blank (Invisible to Lightspeed)">👻 STEALTH (about:blank)</button></li>
-        <li><button class="panic-btn" id="panic-btn" title="Press ESC to panic">ESC → PANIC</button></li>
+        <li>
+          <button class="stealth-btn" id="stealth-launch-btn" title="Open in about:blank (Invisible to Lightspeed)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span>Stealth</span>
+          </button>
+        </li>
+        <li>
+          <button class="panic-btn" id="panic-btn" title="Press ESC to panic">
+            <span class="panic-dot"></span>
+            <span>Panic</span>
+            <kbd>ESC</kbd>
+          </button>
+        </li>
       </ul>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero fade-in fade-in-delay-1">
-      <div class="hero-pill">
-        <span>⚡</span> Built by yours truly · Jojy's Mojis Proxy Engine v3
-      </div>
       <h1>Browse <span class="accent">Without Limits</span></h1>
       <p>High-speed unblocked proxy tunnel & instant game library. Stealth cloaked, zero restrictions.</p>
 
       <div class="search-container">
         <div class="search-bar-wrap">
-          <span class="search-icon-prefix">✦</span>
+          <span class="search-icon-prefix">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </span>
           <input
             type="text"
             class="search-bar"
@@ -92,9 +103,13 @@
           >
           <div class="search-actions">
             <span class="kbd-badge">Enter ↵</span>
-            <button class="search-btn" id="search-btn" title="Launch Proxy">Launch →</button>
+            <button class="search-btn" id="search-btn" title="Launch Proxy">
+              <span>Launch</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
           </div>
         </div>
+        <div class="search-byline">you know who, made this</div>
       </div>
 
       <!-- Quick Access Shortcuts with Real Brand Icons -->
@@ -122,24 +137,6 @@
             <svg viewBox="0 0 24 24" width="18" height="18" fill="#25F4EE"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
           </span>
           TikTok
-        </button>
-        <button class="quick-btn" data-url="https://www.reddit.com">
-          <span class="icon brand-icon reddit-icon">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="#FF4500"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.688-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.197-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
-          </span>
-          Reddit
-        </button>
-        <button class="quick-btn" data-url="https://open.spotify.com">
-          <span class="icon brand-icon spotify-icon">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="#1ED760"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          </span>
-          Spotify
-        </button>
-        <button class="quick-btn" data-url="https://www.twitch.tv">
-          <span class="icon brand-icon twitch-icon">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="#A970FF"><path d="M2.149 0L.537 4.119v16.836h5.731V24h3.224l3.045-3.045h4.657l6.269-6.269V0H2.149zm19.164 13.612l-3.582 3.582H12l-3.045 3.045v-3.045H4.119V2.149h17.194v11.463zm-3.582-7.343v6.268h-2.149V6.269h2.149zm-5.731 0v6.268H9.851V6.269h2.149z"/></svg>
-          </span>
-          Twitch
         </button>
         <button class="quick-btn" data-url="https://chat.openai.com">
           <span class="icon brand-icon chatgpt-icon">

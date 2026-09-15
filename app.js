@@ -156,7 +156,9 @@ async function initProxy() {
       // Configure BareMux transport
       try {
         const { BareMuxConnection } = await import("./baremux/index.mjs");
-        const conn = new BareMuxConnection("./baremux/worker.js");
+        const workerUrl = new URL("./baremux/worker.js", location.href).href;
+        const epoxyUrl = new URL("./epoxy/index.mjs", location.href).href;
+        const conn = new BareMuxConnection(workerUrl);
         const hasLocalBare = location.port && (location.hostname === "localhost" || location.hostname === "127.0.0.1");
 
         if (hasLocalBare) {
@@ -167,12 +169,17 @@ async function initProxy() {
             console.log("[✓] BareMux connected to local Bare server.");
           } catch (localErr) {
             console.warn("[!] Local Bare failed, connecting to Wisp tunnel via Epoxy:", localErr);
-            await conn.setTransport("./epoxy/index.mjs", [{ wisp: "wss://wisp.mercurywork.shop/" }]);
+            await conn.setTransport(epoxyUrl, [{ wisp: "wss://wisp.mercurywork.shop/" }]);
           }
         } else {
           // Cloud / Custom domain / GitHub Pages: Connect to high-speed Wisp WebSocket tunnel!
-          await conn.setTransport("./epoxy/index.mjs", [{ wisp: "wss://wisp.mercurywork.shop/" }]);
-          console.log("[✓] BareMux connected to Wisp tunnel (wss://wisp.mercurywork.shop/) via Epoxy.");
+          try {
+            await conn.setTransport(epoxyUrl, [{ wisp: "wss://wisp.mercurywork.shop/" }]);
+            console.log("[✓] BareMux connected to primary Wisp tunnel via Epoxy.");
+          } catch (wispErr) {
+            console.warn("[!] Primary Wisp failed, trying backup tunnel:", wispErr);
+            await conn.setTransport(epoxyUrl, [{ wisp: "wss://flow-works.me/wisp/" }]);
+          }
         }
       } catch (transportErr) {
         console.error("[✗] BareMux transport setup failed:", transportErr);
