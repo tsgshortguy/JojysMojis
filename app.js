@@ -352,24 +352,8 @@ function createGameCard(game) {
   `;
 
   card.addEventListener("click", () => {
-    if (game.type === "embed") {
-      // Direct embed games (Slope, FNF, FNAF, etc.) load directly into the frame
-      if (loadingOverlay) {
-        loadingOverlay.classList.add("active");
-        setTimeout(() => {
-          if (loadingOverlay) loadingOverlay.classList.remove("active");
-        }, 1200);
-      }
-      proxyContainer.classList.add("active");
-      proxyUrlBar.value = game.url;
-      proxyFrame.src = game.url;
-      proxyFrame.addEventListener("load", () => {
-        if (loadingOverlay) loadingOverlay.classList.remove("active");
-      }, { once: true });
-    } else {
-      // Proxy games (Roblox, 1v1.lol, Cinejoy, Krunker, etc.) route through Ultraviolet proxy
-      navigateProxy(game.url);
-    }
+    // Route through Ultraviolet proxy so school filters (Securly/Lightspeed) cannot inspect or block the URL
+    navigateProxy(game.url);
   });
 
   return card;
