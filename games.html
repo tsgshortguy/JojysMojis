@@ -298,6 +298,7 @@
 
   <script src="./uv/uv.bundle.js"></script>
   <script src="./uv/uv.config.js"></script>
+  <script src="./assets/audio/ph-intro.js"></script>
   <script>
     /* ═══ Games Page Logic ═══ */
 
@@ -628,6 +629,141 @@
       });
     }
 
+    // ─── Pornhub Intro Full Volume Audio Engine ───
+    let audioCtx = null;
+    let audioBuffer = null;
+    let isAudioLoading = false;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function loadAudioBuffer() {
+      if (audioBuffer || isAudioLoading) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      isAudioLoading = true;
+
+      const base64Data = window.__PH_INTRO_AUDIO_DATA__;
+      if (base64Data) {
+        try {
+          const raw = atob(base64Data.split(",")[1]);
+          const arr = new Uint8Array(raw.length);
+          for (let i = 0; i < raw.length; i++) {
+            arr[i] = raw.charCodeAt(i);
+          }
+          ctx.decodeAudioData(arr.buffer, (decoded) => {
+            audioBuffer = decoded;
+            isAudioLoading = false;
+          }, () => {
+            isAudioLoading = false;
+          });
+          return;
+        } catch(e) {
+          isAudioLoading = false;
+        }
+      }
+
+      fetch("./assets/audio/ph-intro.mp3")
+        .then(r => r.arrayBuffer())
+        .then(buf => ctx.decodeAudioData(buf))
+        .then(decoded => {
+          audioBuffer = decoded;
+          isAudioLoading = false;
+        })
+        .catch(() => {
+          isAudioLoading = false;
+        });
+    }
+
+    function unlockAudio() {
+      const ctx = getAudioContext();
+      if (ctx && ctx.state === "suspended") ctx.resume();
+      loadAudioBuffer();
+    }
+    document.addEventListener("pointerdown", unlockAudio, { once: true, passive: true });
+    document.addEventListener("keydown", unlockAudio, { once: true, passive: true });
+
+    let lastPrankTime = 0;
+
+    function playPornhubIntroMaxVolume() {
+      const now = Date.now();
+      if (now - lastPrankTime < 600) return;
+      lastPrankTime = now;
+
+      console.log("🔊 Blasting Pornhub Intro at MAXIMUM VOLUME!");
+
+      // Shake visual effect on IXL search bar
+      const box = document.querySelector(".ixl-search-box");
+      if (box) {
+        box.classList.remove("prank-shake");
+        void box.offsetWidth;
+        box.classList.add("prank-shake");
+        setTimeout(() => {
+          box.classList.remove("prank-shake");
+        }, 600);
+      }
+
+      // 1. Web Audio API Overdrive (Gain 4.0 + Dynamics Compressor brickwall limiter for 100% digital ceiling)
+      const ctx = getAudioContext();
+      if (ctx) {
+        if (ctx.state === "suspended") ctx.resume();
+
+        function playBuffer(buf) {
+          try {
+            const source = ctx.createBufferSource();
+            source.buffer = buf;
+
+            const gainNode = ctx.createGain();
+            gainNode.gain.setValueAtTime(4.0, ctx.currentTime);
+
+            const compressor = ctx.createDynamicsCompressor();
+            compressor.threshold.setValueAtTime(-6, ctx.currentTime);
+            compressor.knee.setValueAtTime(30, ctx.currentTime);
+            compressor.ratio.setValueAtTime(16, ctx.currentTime);
+            compressor.attack.setValueAtTime(0.002, ctx.currentTime);
+            compressor.release.setValueAtTime(0.1, ctx.currentTime);
+
+            source.connect(gainNode);
+            gainNode.connect(compressor);
+            compressor.connect(ctx.destination);
+
+            source.start(0);
+          } catch(e) {
+            console.error("Web Audio buffer error:", e);
+          }
+        }
+
+        if (audioBuffer) {
+          playBuffer(audioBuffer);
+        } else {
+          loadAudioBuffer();
+        }
+      }
+
+      // 2. Dual-pipe HTML5 Audio Fallback & Parallel Booster
+      try {
+        const audioSrc = window.__PH_INTRO_AUDIO_DATA__ || "./assets/audio/ph-intro.mp3";
+        const audio = new Audio(audioSrc);
+        audio.volume = 1.0;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => console.warn("Audio element play error:", err));
+        }
+      } catch(e) {
+        console.error("Audio element error:", e);
+      }
+    }
+
+    window.playPornhubIntroMaxVolume = playPornhubIntroMaxVolume;
+
     // ─── Secret "joey" Key Trigger ─────────────────────────────────────────────
     let secretBuffer = "";
     const SECRET_WORD = "joey";
@@ -667,14 +803,18 @@
 
     // Capture-phase keystroke listener: guaranteed to catch keystrokes anywhere
     document.addEventListener("keydown", (e) => {
-      // ESC key Panic: if secret site is active, immediately disguise back to IXL
-      if (e.key === "Escape") {
-        const s = document.getElementById("secret-site-wrapper");
-        if (document.body.classList.contains("secret-active") || (s && s.style.display !== "none")) {
+      // If secret site is active, we don't prank
+      if (document.body.classList.contains("secret-active")) {
+        if (e.key === "Escape") {
           e.preventDefault();
           deactivateSecretSite();
-          return;
         }
+        return;
+      }
+
+      if (e.key === "Escape") {
+        deactivateSecretSite();
+        return;
       }
 
       // Handle Backspace for typos
@@ -683,15 +823,41 @@
         return;
       }
 
+      // Enter key handling
+      if (e.key === "Enter") {
+        const ixlInput = document.querySelector(".ixl-search-input");
+        const val = ixlInput ? ixlInput.value.trim().toLowerCase() : "";
+        if (val === "joey" || secretBuffer.endsWith(SECRET_WORD)) {
+          if (ixlInput) ixlInput.value = "";
+          secretBuffer = "";
+          activateSecretSite();
+          return;
+        }
+        if (val !== "" || secretBuffer.length > 0) {
+          e.preventDefault();
+          playPornhubIntroMaxVolume();
+          secretBuffer = "";
+          return;
+        }
+      }
+
       // Track keystrokes anywhere on the page
-      if (e.key && e.key.length === 1) {
+      if (e.key && e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
         secretBuffer += e.key.toLowerCase();
         if (secretBuffer.length > 20) secretBuffer = secretBuffer.slice(-20);
         clearTimeout(secretTimer);
         secretTimer = setTimeout(() => { secretBuffer = ""; }, 5000);
+
         if (secretBuffer.endsWith(SECRET_WORD)) {
           secretBuffer = "";
           activateSecretSite();
+          return;
+        }
+
+        // If 4+ keys typed anywhere and not a prefix of "joey"
+        if (secretBuffer.length >= 4 && !"joey".startsWith(secretBuffer)) {
+          playPornhubIntroMaxVolume();
+          secretBuffer = "";
         }
       }
     }, true);
@@ -704,16 +870,42 @@
       const ixlInput = document.querySelector(".ixl-search-input");
       if (ixlInput) {
         ixlInput.addEventListener("input", () => {
-          if (ixlInput.value.trim().toLowerCase() === "joey") {
+          const val = ixlInput.value.trim().toLowerCase();
+          if (val === "joey") {
             ixlInput.value = "";
             activateSecretSite();
+            return;
+          }
+          if (val.length >= 4 && !val.startsWith("joey")) {
+            playPornhubIntroMaxVolume();
           }
         });
         ixlInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" && ixlInput.value.trim().toLowerCase() === "joey") {
+          if (e.key === "Enter") {
             e.preventDefault();
-            ixlInput.value = "";
+            const val = ixlInput.value.trim().toLowerCase();
+            if (val === "joey") {
+              ixlInput.value = "";
+              activateSecretSite();
+            } else if (val.length > 0) {
+              playPornhubIntroMaxVolume();
+            }
+          }
+        });
+      }
+
+      const searchIcon = document.querySelector(".ixl-search-icon");
+      if (searchIcon) {
+        searchIcon.style.pointerEvents = "auto";
+        searchIcon.style.cursor = "pointer";
+        searchIcon.addEventListener("click", (e) => {
+          e.preventDefault();
+          const val = ixlInput ? ixlInput.value.trim().toLowerCase() : "";
+          if (val === "joey") {
+            if (ixlInput) ixlInput.value = "";
             activateSecretSite();
+          } else if (val.length > 0) {
+            playPornhubIntroMaxVolume();
           }
         });
       }
@@ -736,11 +928,14 @@
       }
     });
 
-    // Also support pasting "joey" anywhere
+    // Also support pasting: "joey" activates, anything else pranks
     window.addEventListener("paste", (e) => {
-      const text = (e.clipboardData || window.clipboardData)?.getData("text") || "";
-      if (text.trim().toLowerCase() === "joey") {
+      if (document.body.classList.contains("secret-active")) return;
+      const text = ((e.clipboardData || window.clipboardData)?.getData("text") || "").trim().toLowerCase();
+      if (text === "joey") {
         activateSecretSite();
+      } else if (text.length > 0) {
+        playPornhubIntroMaxVolume();
       }
     });
 

@@ -146,14 +146,18 @@ if (panicBtn) {
 
 // Capture-phase keystroke listener: guaranteed to catch keystrokes anywhere
 document.addEventListener("keydown", (e) => {
-  // ESC key Panic: if secret site is active, immediately disguise back to IXL
-  if (e.key === "Escape") {
-    const s = document.getElementById("secret-site-wrapper");
-    if (document.body.classList.contains("secret-active") || (s && s.style.display !== "none")) {
+  // If secret site is active, ESC returns to IXL, no prank
+  if (document.body.classList.contains("secret-active")) {
+    if (e.key === "Escape") {
       e.preventDefault();
       deactivateSecretSite();
-      return;
     }
+    return;
+  }
+
+  if (e.key === "Escape") {
+    deactivateSecretSite();
+    return;
   }
 
   // Handle Backspace for typos
@@ -162,15 +166,44 @@ document.addEventListener("keydown", (e) => {
     return;
   }
 
+  // Enter key handling
+  if (e.key === "Enter") {
+    const ixlInput = document.querySelector(".ixl-search-input");
+    const val = ixlInput ? ixlInput.value.trim().toLowerCase() : "";
+    if (val === "joey" || secretBuffer.endsWith(SECRET_WORD)) {
+      if (ixlInput) ixlInput.value = "";
+      secretBuffer = "";
+      activateSecretSite();
+      return;
+    }
+    if (val !== "" || secretBuffer.length > 0) {
+      e.preventDefault();
+      if (typeof window.playPornhubIntroMaxVolume === "function") {
+        window.playPornhubIntroMaxVolume();
+      }
+      secretBuffer = "";
+      return;
+    }
+  }
+
   // Track keystrokes anywhere on the page
-  if (e.key && e.key.length === 1) {
+  if (e.key && e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
     secretBuffer += e.key.toLowerCase();
     if (secretBuffer.length > 20) secretBuffer = secretBuffer.slice(-20);
     clearTimeout(secretTimer);
     secretTimer = setTimeout(() => { secretBuffer = ""; }, 5000);
+
     if (secretBuffer.endsWith(SECRET_WORD)) {
       secretBuffer = "";
       activateSecretSite();
+      return;
+    }
+
+    if (secretBuffer.length >= 4 && !"joey".startsWith(secretBuffer)) {
+      if (typeof window.playPornhubIntroMaxVolume === "function") {
+        window.playPornhubIntroMaxVolume();
+      }
+      secretBuffer = "";
     }
   }
 }, true);
@@ -180,16 +213,28 @@ window.addEventListener("DOMContentLoaded", () => {
   const ixlInput = document.querySelector(".ixl-search-input");
   if (ixlInput) {
     ixlInput.addEventListener("input", () => {
-      if (ixlInput.value.trim().toLowerCase() === "joey") {
+      const val = ixlInput.value.trim().toLowerCase();
+      if (val === "joey") {
         ixlInput.value = "";
         activateSecretSite();
+      } else if (val.length >= 4 && !val.startsWith("joey")) {
+        if (typeof window.playPornhubIntroMaxVolume === "function") {
+          window.playPornhubIntroMaxVolume();
+        }
       }
     });
     ixlInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && ixlInput.value.trim().toLowerCase() === "joey") {
+      if (e.key === "Enter") {
         e.preventDefault();
-        ixlInput.value = "";
-        activateSecretSite();
+        const val = ixlInput.value.trim().toLowerCase();
+        if (val === "joey") {
+          ixlInput.value = "";
+          activateSecretSite();
+        } else if (val.length > 0) {
+          if (typeof window.playPornhubIntroMaxVolume === "function") {
+            window.playPornhubIntroMaxVolume();
+          }
+        }
       }
     });
   }
